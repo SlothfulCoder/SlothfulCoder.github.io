@@ -22,17 +22,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="第二个">
+  <meta name="description" content="知识点：类与jvm、属性、堆、栈、方法区、成员方法、方法重载、递归（汉诺塔、迷宫问题、八皇后）、可变参数、构造器、this、Scanner">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随手记002">
 <meta property="og:url" content="http://example.com/2021/04/15/%E9%9A%8F%E6%89%8B%E8%AE%B0002/index.html">
 <meta property="og:site_name" content="梁山好岗のBLOG">
-<meta property="og:description" content="第二个">
+<meta property="og:description" content="知识点：类与jvm、属性、堆、栈、方法区、成员方法、方法重载、递归（汉诺塔、迷宫问题、八皇后）、可变参数、构造器、this、Scanner">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210402002844.png">
 <meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210402005130.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210417200050.png">
 <meta property="article:published_time" content="2021-04-15T14:45:22.471Z">
-<meta property="article:modified_time" content="2021-04-15T16:04:58.463Z">
+<meta property="article:modified_time" content="2021-04-18T17:01:19.377Z">
 <meta property="article:author" content="梁山好岗">
 <meta property="article:tag" content="hexo,blog,梁山好岗">
 <meta name="twitter:card" content="summary">
@@ -197,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-16 00:04:58" itemprop="dateModified" datetime="2021-04-16T00:04:58+08:00">2021-04-16</time>
+                <time title="修改时间：2021-04-19 01:01:19" itemprop="dateModified" datetime="2021-04-19T01:01:19+08:00">2021-04-19</time>
               </span>
 
           
@@ -211,7 +212,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>第二个</p>
+        <p>知识点：类与jvm、属性、堆、栈、方法区、成员方法、方法重载、递归（汉诺塔、迷宫问题、八皇后）、可变参数、构造器、this、Scanner</p>
 <span id="more"></span>
 
 <h2 id="1-对象在jvm内存中存在形式"><a href="#1-对象在jvm内存中存在形式" class="headerlink" title="1.对象在jvm内存中存在形式"></a>1.对象在jvm内存中存在形式</h2><p>创建cat对象且共有三个属性，名字=小白，年龄=12，花色=白色；</p>
@@ -301,6 +302,40 @@
 </li>
 <li>对象在堆中大的地址返回给p</li>
 </ol>
+<h2 id="13-this"><a href="#13-this" class="headerlink" title="13.this"></a>13.this</h2><p>可以把this理解为对象中一个指向自身地址的属性。</p>
+<p>this的用法：</p>
+<ol>
+<li>this关键字可以用来访问本类的属性、方法、构造器</li>
+<li>this用于区分当前类的属性和局部变量</li>
+<li>访问成员方法的语法：this.方法名(参数列表);</li>
+<li>访问构造器语法：this(参数列表);<ol>
+<li>注意只能在构造器中使用</li>
+<li>必须放置在第一条语句</li>
+</ol>
+</li>
+<li>this不能在类定义的外部使用，只能在类定义的方法中使用。</li>
+</ol>
+<h2 id="14-非public类中的main方法"><a href="#14-非public类中的main方法" class="headerlink" title="14.非public类中的main方法"></a>14.非public类中的main方法</h2><p>任何一个类都可以有main方法（包括非public类）。</p>
+<p>使用非public类Test的方法如下：</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210417200050.png" alt="image-20210417200050031"></p>
+<h2 id="15-接收键盘输入Scanner"><a href="#15-接收键盘输入Scanner" class="headerlink" title="15.接收键盘输入Scanner"></a>15.接收键盘输入Scanner</h2><p>Scanner类是 Java5 的新特征，我们可以通过 Scanner 类来获取用户的输入。</p>
+<p>简单使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导包</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建Scanner对象</span></span><br><span class="line">    Scanner myScanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="comment">// 接收键盘输入的int类型数据</span></span><br><span class="line">    <span class="keyword">int</span> num = myScanner.nextInt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.接收字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = myScanner.next();</span><br></pre></td></tr></table></figure>
+
+<p>2.接收int</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = myScanner.nextInt();</span><br></pre></td></tr></table></figure>
+
+<p>3.接收double</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> d = myScanner.nextDouble();</span><br></pre></td></tr></table></figure>
+
+<p>4.接收char</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c1 = myScanner.next().charAt(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+
+
 
     </div>
 
@@ -329,7 +364,10 @@
     <a href="/2021/04/15/%E9%9A%8F%E6%89%8B%E8%AE%B0001/" rel="prev" title="随手记001">
       <i class="fa fa-chevron-left"></i> 随手记001
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/18/%E9%9A%8F%E6%89%8B%E8%AE%B0003/" rel="next" title="随手记003">
+      随手记003 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -388,7 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AF%B9%E8%B1%A1%E5%9C%A8jvm%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%9C%A8%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.对象在jvm内存中存在形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B1%9E%E6%80%A7"><span class="nav-text">2.属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%A0%88%E3%80%81%E5%A0%86%E3%80%81%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-text">3.栈、堆、方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">4.方法调用过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E7%9A%84%E5%88%9B%E5%BB%BA%E6%A0%BC%E5%BC%8F"><span class="nav-text">5.成员方法的创建格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E4%BC%A0%E5%8F%82"><span class="nav-text">6.成员方法传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%80%92%E5%BD%92%E7%A4%BA%E4%BE%8B"><span class="nav-text">7.递归示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AC%ACn%E4%BD%8D"><span class="nav-text">1).查看斐波那契数列第n位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%8C%B4%E5%AD%90%E5%90%83%E6%A1%83%E9%97%AE%E9%A2%98"><span class="nav-text">2).猴子吃桃问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B1%89%E8%AF%BA%E5%A1%94"><span class="nav-text">3).汉诺塔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-text">8.方法重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="nav-text">9.可变参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%8F%98%E9%87%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">10.变量生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-text">11.构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="nav-text">12.创建对象流程分析</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AF%B9%E8%B1%A1%E5%9C%A8jvm%E5%86%85%E5%AD%98%E4%B8%AD%E5%AD%98%E5%9C%A8%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.对象在jvm内存中存在形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B1%9E%E6%80%A7"><span class="nav-text">2.属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%A0%88%E3%80%81%E5%A0%86%E3%80%81%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-text">3.栈、堆、方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="nav-text">4.方法调用过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E7%9A%84%E5%88%9B%E5%BB%BA%E6%A0%BC%E5%BC%8F"><span class="nav-text">5.成员方法的创建格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E4%BC%A0%E5%8F%82"><span class="nav-text">6.成员方法传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%80%92%E5%BD%92%E7%A4%BA%E4%BE%8B"><span class="nav-text">7.递归示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AC%ACn%E4%BD%8D"><span class="nav-text">1).查看斐波那契数列第n位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%8C%B4%E5%AD%90%E5%90%83%E6%A1%83%E9%97%AE%E9%A2%98"><span class="nav-text">2).猴子吃桃问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B1%89%E8%AF%BA%E5%A1%94"><span class="nav-text">3).汉诺塔</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-text">8.方法重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="nav-text">9.可变参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%8F%98%E9%87%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">10.变量生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-text">11.构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="nav-text">12.创建对象流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-this"><span class="nav-text">13.this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E9%9D%9Epublic%E7%B1%BB%E4%B8%AD%E7%9A%84main%E6%96%B9%E6%B3%95"><span class="nav-text">14.非public类中的main方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E6%8E%A5%E6%94%B6%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5Scanner"><span class="nav-text">15.接收键盘输入Scanner</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -402,7 +440,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
