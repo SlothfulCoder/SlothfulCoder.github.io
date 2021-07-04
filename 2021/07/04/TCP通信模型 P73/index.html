@@ -22,31 +22,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="站点描述">
-<meta property="og:type" content="website">
+  <meta name="description" content="一、      TCP通信模型 P73 echo.server.c （服务器端） #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa&#x2F;inet.h&gt; #include &lt;sys&#x2F;socket.h&amp;g">
+<meta property="og:type" content="article">
 <meta property="og:title" content="梁山好岗のBLOG">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2021/07/04/TCP%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B%20P73/index.html">
 <meta property="og:site_name" content="梁山好岗のBLOG">
-<meta property="og:description" content="站点描述">
+<meta property="og:description" content="一、      TCP通信模型 P73 echo.server.c （服务器端） #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa&#x2F;inet.h&gt; #include &lt;sys&#x2F;socket.h&amp;g">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-04T15:16:04.064Z">
+<meta property="article:modified_time" content="2021-07-04T15:15:33.053Z">
 <meta property="article:author" content="梁山好岗">
 <meta property="article:tag" content="hexo,blog,梁山好岗">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/07/04/TCP%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B%20P73/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>梁山好岗のBLOG</title>
+  <title> | 梁山好岗のBLOG</title>
   
 
 
@@ -155,9 +157,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -173,10 +176,9 @@
       <meta itemprop="name" content="梁山好岗のBLOG">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/07/04/TCP%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B%20P73/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -200,7 +202,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>一、      TCP通信模型 P73</p>
+        <p>一、      TCP通信模型 P73</p>
 <p>echo.server.c （服务器端）</p>
 <p>#include &lt;stdio.h&gt;</p>
 <p>#include &lt;stdlib.h&gt;</p>
@@ -768,661 +770,51 @@ return 0;
 <p>char name[NAME_SIZE]=”[DEFAULT”;<br>char msg[BUF_SIZE];</p>
 <p>int main(int argc,char <em>argv[]){<br>    int sock;<br>    struct sockaddr_in serv_addr;<br>    pid_t pid;<br>    if(argc!=4){<br>        printf(“usage:%s <port>\n”,argv[0]);<br>        exit(1);<br>    }<br>    sprintf(name,”[%s]”,argv[3]);<br>    sock=socket(PF_INET,SOCK_STREAM,0);<br>    memset(&amp;serv_addr,0,sizeof(serv_addr));<br>    serv_addr.sin_family=AF_INET;<br>    serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);<br>    serv_addr.sin_port=htons(atoi(argv[1]));<br>    if(connect(sock,(struct sockaddr</em>)&amp;serv_addr,sizeof(serv_addr))==-1)<br>        error_handling(“connect() error”);<br>        pid=fork();<br>        if(pid==0){<br>            send_msg((void*)&amp;sock);<br>        }else<br>            recv_msg((void*)&amp;sock);<br>            close(sock);<br>            return 0;<br>}<br>void * send_msg(void <em>arg){<br>    int sock=</em>((int*)arg);<br>    char name_msg[NAME_SIZE+BUF_SIZE];<br>    while(1){<br>        fgets(msg,BUF_SIZE,stdin);<br>        if(!strcmp(msg,”q\n”)||!strcmp(msg,”Q\n”)){<br>            close(sock);<br>            exit(0);<br>        }<br>        sprintf(name_msg,”%s %s”,name,msg);<br>        write(sock,name_msg,strlen(name_msg));<br>    }<br>    return NULL;<br>}<br>void * recv_msg(void <em>arg){<br>    int sock=</em>((int*)arg);<br>    char name_msg[NAME_SIZE+BUF_SIZE];<br>    int str_len;<br>    while(1){<br>        str_len=read(sock,name_msg,NAME_SIZE+BUF_SIZE-1);<br>        if(str_len==-1)<br>            return (void*)-1;<br>        name_msg[str_len]=0;<br>        fputs(name_msg,stdout);<br>    }<br>    return NULL;<br>}<br>void error_handling(char *msg){<br>    fputs(msg,stderr);<br>    fputc(‘\n’,stderr);<br>    exit(1);<br>}</p>
 
-      
     </div>
 
     
     
     
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="梁山好岗 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="梁山好岗 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009/" class="post-title-link" itemprop="url">Java学习笔记09</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-30 17:26:41" itemprop="dateCreated datePublished" datetime="2021-06-30T17:26:41+08:00">2021-06-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-01 01:05:03" itemprop="dateModified" datetime="2021-07-01T01:05:03+08:00">2021-07-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/27/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/27/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008/" class="post-title-link" itemprop="url">Java学习笔记08</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-06-27 17:19:56 / 修改时间：22:40:19" itemprop="dateCreated datePublished" datetime="2021-06-27T17:19:56+08:00">2021-06-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：Math类、Arrays类、System类、BigInteger类、BigDecimal类、Date类、SimpleDateFormat类、Calendar类、LocalDate类、LocalTime类、LocalDateTime类、DateTimeFormatter类、Instant类</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/27/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B008/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B009/" rel="prev" title="Java学习笔记09">
+      <i class="fa fa-chevron-left"></i> Java学习笔记09
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/26/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/26/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007/" class="post-title-link" itemprop="url">Java学习笔记07</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-06-26 13:45:52 / 修改时间：21:29:20" itemprop="dateCreated datePublished" datetime="2021-06-26T13:45:52+08:00">2021-06-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：包装类、自动装箱、自动拆箱、Integer、三目运算符细节、String、StringBuffer、StringBuilder、字符串</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/26/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/22/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/22/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006/" class="post-title-link" itemprop="url">Java学习笔记06</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-22 00:59:32" itemprop="dateCreated datePublished" datetime="2021-06-22T00:59:32+08:00">2021-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-25 20:27:39" itemprop="dateModified" datetime="2021-06-25T20:27:39+08:00">2021-06-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：枚举、增强for、反编译、注解、元注解、异常、运行时异常、编译时异常、try-catch、throws、Exception</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/22/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B006/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005/" class="post-title-link" itemprop="url">Java学习笔记05</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 23:04:09" itemprop="dateCreated datePublished" datetime="2021-06-19T23:04:09+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-26 23:32:55" itemprop="dateModified" datetime="2021-06-26T23:32:55+08:00">2021-06-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：单例模式、饿汉式、懒汉式、final关键字、抽象类、接口、内部类、局部内部类、匿名内部类、成员内部类、静态内部类</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/" class="post-title-link" itemprop="url">Java学习笔记04</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 09:18:51" itemprop="dateCreated datePublished" datetime="2021-06-19T09:18:51+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 16:58:09" itemprop="dateModified" datetime="2021-06-20T16:58:09+08:00">2021-06-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关键字：类变量、类方法、main方法、代码块</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/19/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/18/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/18/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/" class="post-title-link" itemprop="url">Java项目之零钱通</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-18 14:11:52" itemprop="dateCreated datePublished" datetime="2021-06-18T14:11:52+08:00">2021-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 12:51:22" itemprop="dateModified" datetime="2021-06-19T12:51:22+08:00">2021-06-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210619125009.png" alt="image-20210619125009703"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/18/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/18/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/18/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/" class="post-title-link" itemprop="url">Java学习笔记03</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-18 10:25:02" itemprop="dateCreated datePublished" datetime="2021-04-18T10:25:02+08:00">2021-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 17:49:06" itemprop="dateModified" datetime="2021-06-20T17:49:06+08:00">2021-06-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>知识点：IDEA快捷键、访问修饰符、封装、继承、super、重写、多态、向上转型、向下转型、instanceof、Object类、断点调试</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/18/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/15/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="梁山好岗">
-      <meta itemprop="description" content="站点描述">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="梁山好岗のBLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/15/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/" class="post-title-link" itemprop="url">Java学习笔记02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-15 22:45:22" itemprop="dateCreated datePublished" datetime="2021-04-15T22:45:22+08:00">2021-04-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-17 20:47:11" itemprop="dateModified" datetime="2021-06-17T20:47:11+08:00">2021-06-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>知识点：类与jvm、属性、堆、栈、方法区、成员方法、方法重载、递归（汉诺塔、迷宫问题、八皇后）、可变参数、构造器、this、Scanner</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/15/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
