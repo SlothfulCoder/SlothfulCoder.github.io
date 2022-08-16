@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Java项目之零钱通">
+<meta property="og:url" content="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210619125009.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.844Z">
+<meta property="article:modified_time" content="2021-06-19T04:51:22.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210619125009.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/","path":"2022/08/16/Java项目之零钱通/","title":"Java项目之零钱通"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java项目之零钱通 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9B%B6%E9%92%B1%E9%80%9A%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">1.零钱通系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%88%E6%9C%ACOOP"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象版本OOP</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%9B%B6%E9%92%B1%E9%80%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java项目之零钱通 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java项目之零钱通
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-19 12:51:22" itemprop="dateModified" datetime="2021-06-19T12:51:22+08:00">2021-06-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210619125009.png" alt="image-20210619125009703"></p>
+<span id="more"></span>
+
+<h2 id="1-零钱通系统"><a href="#1-零钱通系统" class="headerlink" title="1.零钱通系统"></a>1.零钱通系统</h2><h3 id="面向过程代码"><a href="#面向过程代码" class="headerlink" title="面向过程代码"></a>面向过程代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmallChangeSys</span> &#123;</span><br><span class="line">    <span class="comment">// 1.完成显示菜单</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">loop</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">details</span> <span class="operator">=</span> <span class="string">&quot;-----------------零钱通明细-----------------&quot;</span>;</span><br><span class="line"></span><br><span class="line">        Date date;</span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">format</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd hh:mm&quot;</span>);</span><br><span class="line">        <span class="type">double</span> money;</span><br><span class="line">        <span class="type">double</span> <span class="variable">balance</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        String note;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;===========零钱通菜单===========&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t1 零钱通明细&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t2 收益入账&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t3 消费&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t4 退    出&quot;</span>);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;请选择（1-4）:&quot;</span>);</span><br><span class="line">            key = scanner.next();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 使用switch 分支控制</span></span><br><span class="line">            <span class="keyword">switch</span> (key)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                    System.out.println(details);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">                    System.out.print(<span class="string">&quot;收益入账金额：&quot;</span>);</span><br><span class="line">                    money = scanner.nextDouble();</span><br><span class="line">                    <span class="keyword">if</span> (money &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;入账金额错误！&quot;</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    balance += money;</span><br><span class="line">                    date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">                    details += <span class="string">&quot;\n收益入账\t+&quot;</span> + money + <span class="string">&quot;\t&quot;</span> + format.format(date) + <span class="string">&quot;\t&quot;</span> + balance;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">                    System.out.print(<span class="string">&quot;消费金额：&quot;</span>);</span><br><span class="line">                    money = scanner.nextDouble();</span><br><span class="line">                    <span class="keyword">if</span> (money &lt; <span class="number">0</span> || money &gt; balance)&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;消费金额错误&quot;</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.print(<span class="string">&quot;消费说明：&quot;</span>);</span><br><span class="line">                    note = scanner.next();</span><br><span class="line">                    balance -= money;</span><br><span class="line">                    date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">                    details += <span class="string">&quot;\n&quot;</span>+ note +<span class="string">&quot;\t-&quot;</span> + money + <span class="string">&quot;\t&quot;</span> + format.format(date) + <span class="string">&quot;\t&quot;</span> + balance;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;4&quot;</span>:</span><br><span class="line"><span class="comment">//                    System.out.println(&quot;4 退    出&quot;);</span></span><br><span class="line">                    <span class="type">String</span> <span class="variable">choice</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;你确认要退出吗？y/n&quot;</span>);</span><br><span class="line">                        choice = scanner.next();</span><br><span class="line">                        <span class="keyword">if</span> (<span class="string">&quot;y&quot;</span>.equals(choice) || <span class="string">&quot;n&quot;</span>.equals(choice))&#123;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="string">&quot;y&quot;</span>.equals(choice))&#123;</span><br><span class="line">                        loop = <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;选择有误，请重新选择&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">while</span> (loop);</span><br><span class="line">        System.out.println(<span class="string">&quot;退出了零钱通系统&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="面向对象版本OOP"><a href="#面向对象版本OOP" class="headerlink" title="面向对象版本OOP"></a>面向对象版本OOP</h3><p>方法类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmallChangeSysOOP</span> &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">loop</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">    <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">details</span> <span class="operator">=</span> <span class="string">&quot;-----------------零钱通明细-----------------&quot;</span>;</span><br><span class="line"></span><br><span class="line">    Date date;</span><br><span class="line">    <span class="type">SimpleDateFormat</span> <span class="variable">format</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd hh:mm&quot;</span>);</span><br><span class="line">    <span class="type">double</span> money;</span><br><span class="line">    <span class="type">double</span> <span class="variable">balance</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    String note;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">mainMenu</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;===========零钱通菜单(OOP)===========&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t1 零钱通明细&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t2 收益入账&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t3 消费&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;\t\t\t4 退    出&quot;</span>);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;请选择（1-4）:&quot;</span>);</span><br><span class="line">            key = scanner.next();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 使用switch 分支控制</span></span><br><span class="line">            <span class="keyword">switch</span> (key)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                    <span class="built_in">this</span>.showDetails();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">                    <span class="built_in">this</span>.income();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">                    <span class="built_in">this</span>.consume();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;4&quot;</span>:</span><br><span class="line">                    <span class="built_in">this</span>.logout();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="built_in">this</span>.error();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">while</span> (loop);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">showDetails</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(details);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">income</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;收益入账金额：&quot;</span>);</span><br><span class="line">        money = scanner.nextDouble();</span><br><span class="line">        <span class="keyword">if</span> (money &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;入账金额错误！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        balance += money;</span><br><span class="line">        date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        details += <span class="string">&quot;\n收益入账\t+&quot;</span> + money + <span class="string">&quot;\t&quot;</span> + format.format(date) + <span class="string">&quot;\t&quot;</span> + balance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">consume</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;消费金额：&quot;</span>);</span><br><span class="line">        money = scanner.nextDouble();</span><br><span class="line">        <span class="keyword">if</span> (money &lt; <span class="number">0</span> || money &gt; balance)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;消费金额错误&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="string">&quot;消费说明：&quot;</span>);</span><br><span class="line">        note = scanner.next();</span><br><span class="line">        balance -= money;</span><br><span class="line">        date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        details += <span class="string">&quot;\n&quot;</span>+ note +<span class="string">&quot;\t-&quot;</span> + money + <span class="string">&quot;\t&quot;</span> + format.format(date) + <span class="string">&quot;\t&quot;</span> + balance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">logout</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">choice</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;你确认要退出吗？y/n&quot;</span>);</span><br><span class="line">            choice = scanner.next();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;y&quot;</span>.equals(choice) || <span class="string">&quot;n&quot;</span>.equals(choice))&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;y&quot;</span>.equals(choice))&#123;</span><br><span class="line">            loop = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">error</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;选择有误，请重新选择&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmallChangeSysOOPMain</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SmallChangeSysOOP</span> <span class="variable">smallChangeSys</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SmallChangeSysOOP</span>();</span><br><span class="line">        smallChangeSys.mainMenu();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007/" rel="prev" title="JavaWeb学习笔记07">
+                  <i class="fa fa-chevron-left"></i> JavaWeb学习笔记07
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9D%A6%E5%85%8B%E5%A4%A7%E6%88%98/" rel="next" title="Java项目之坦克大战">
+                  Java项目之坦克大战 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

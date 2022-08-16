@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="知识点：IDEA快捷键、访问修饰符、封装、继承、super、重写、多态、向上转型、向下转型、instanceof、Object类、断点调试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习笔记03">
+<meta property="og:url" content="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="知识点：IDEA快捷键、访问修饰符、封装、继承、super、重写、多态、向上转型、向下转型、instanceof、Object类、断点调试">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210616221546.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210616230401.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.875Z">
+<meta property="article:modified_time" content="2021-06-20T09:49:06.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210616221546.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/","path":"2022/08/16/Java学习笔记03/","title":"Java学习笔记03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java学习笔记03 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">1.IDEA常用快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-package%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">2.package包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">3.访问修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B0%81%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">4.封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%BB%A7%E6%89%BF"><span class="nav-number">5.</span> <span class="nav-text">5.继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">注意点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-x2F-%E6%96%B9%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%84%E5%88%99%EF%BC%9A"><span class="nav-number">5.2.</span> <span class="nav-text">属性&#x2F;方法访问规则：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E7%B1%BB%E5%86%85%E5%AD%98%E5%8F%98%E5%8C%96"><span class="nav-number">5.3.</span> <span class="nav-text">创建子类内存变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-super"><span class="nav-number">6.</span> <span class="nav-text">6.super</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Override%E2%80%94%E2%80%94%E9%87%8D%E5%86%99"><span class="nav-number">7.</span> <span class="nav-text">7.Override——重写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.1.</span> <span class="nav-text">重载和重写的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A4%9A%E6%80%81"><span class="nav-number">8.</span> <span class="nav-text">8.多态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B"><span class="nav-number">8.1.</span> <span class="nav-text">向上转型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8B%E8%BD%AC%E5%9E%8B"><span class="nav-number">8.2.</span> <span class="nav-text">向下转型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof-%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">8.3.</span> <span class="nav-text">instanceof 比较操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6"><span class="nav-number">8.4.</span> <span class="nav-text">Java的动态绑定机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E6%95%B0%E7%BB%84"><span class="nav-number">8.5.</span> <span class="nav-text">多态数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Object%E7%B1%BB"><span class="nav-number">9.</span> <span class="nav-text">9.Object类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#equals%E6%96%B9%E6%B3%95%E5%92%8C-x3D-x3D"><span class="nav-number">9.1.</span> <span class="nav-text">equals方法和 &#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashCode%E6%96%B9%E6%B3%95"><span class="nav-number">9.2.</span> <span class="nav-text">hashCode方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toString%E6%96%B9%E6%B3%95"><span class="nav-number">9.3.</span> <span class="nav-text">toString方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize%E6%96%B9%E6%B3%95"><span class="nav-number">9.4.</span> <span class="nav-text">finalize方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="nav-number">10.</span> <span class="nav-text">断点调试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java学习笔记03 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java学习笔记03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-20 17:49:06" itemprop="dateModified" datetime="2021-06-20T17:49:06+08:00">2021-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>知识点：IDEA快捷键、访问修饰符、封装、继承、super、重写、多态、向上转型、向下转型、instanceof、Object类、断点调试</p>
+<span id="more"></span>
+
+<h2 id="1-IDEA常用快捷键"><a href="#1-IDEA常用快捷键" class="headerlink" title="1.IDEA常用快捷键"></a>1.IDEA常用快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Alt+Enter</code></td>
+<td>导入包，自动修正代码</td>
+</tr>
+<tr>
+<td><code>Ctrl+V</code></td>
+<td>删除光标所在行</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>复制光标所在行的内容，插入光标所在下面</td>
+</tr>
+<tr>
+<td><code>Ctrl+Alt+L</code></td>
+<td>格式化代码</td>
+</tr>
+<tr>
+<td><code>Ctrl+/</code></td>
+<td>单行注释，再按取消注释</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+/</code></td>
+<td>选中代码注释，多行注释，再按取消注释</td>
+</tr>
+<tr>
+<td><code>Alt+Ins</code></td>
+<td>自动生成代码，toString，get，set等方法</td>
+</tr>
+<tr>
+<td><code>Alt+Shift+向上箭头</code></td>
+<td>移动当前代码</td>
+</tr>
+<tr>
+<td><code>Shift+F6</code></td>
+<td>修改所有同名字符</td>
+</tr>
+<tr>
+<td><code>Alt+/</code></td>
+<td>代码提示</td>
+</tr>
+<tr>
+<td><code>Ctrl+H</code></td>
+<td>查看类的继承关系</td>
+</tr>
+</tbody></table>
+<h2 id="2-package包"><a href="#2-package包" class="headerlink" title="2.package包"></a>2.package包</h2><p>基本语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 包名; <span class="comment">// 打包</span></span><br><span class="line"><span class="keyword">import</span> 包; <span class="comment">// 导包</span></span><br></pre></td></tr></table></figure>
+
+<p>名命规则：只能包含数字、字母下划线、小圆点，但不能以数字开头，不能是关键字或保留字</p>
+<p>名命规范：com.公司名.项目名.业务模块名</p>
+<p>注意：package的作用是声明当前类所在的包，需要放在类的最上面，一个类中最多只有一句package</p>
+<h2 id="3-访问修饰符"><a href="#3-访问修饰符" class="headerlink" title="3.访问修饰符"></a>3.访问修饰符</h2><p>分类和访问范围：</p>
+<table>
+<thead>
+<tr>
+<th align="center">访问级别</th>
+<th align="center">访问控制修饰符</th>
+<th align="center">同类</th>
+<th align="center">同包</th>
+<th align="center">子类</th>
+<th align="center">不同包</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">公开</td>
+<td align="center">public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">受保护</td>
+<td align="center">protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">默认</td>
+<td align="center">没有修饰符</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">私有</td>
+<td align="center">private</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<p>注意事项：</p>
+<ol>
+<li>修饰符可以用来修饰属性、成员方法、类</li>
+<li>只有默认的和public才能修饰类</li>
+<li>成员方法和属性的访问规则完全一样</li>
+</ol>
+<h2 id="4-封装"><a href="#4-封装" class="headerlink" title="4.封装"></a>4.封装</h2><p>定义：封装就是把抽象的数据【属性】和对数据操作【方法】封装在一起，数据被保护在内部，程序的其他部分只有通过被授权的操作【方法】，才能对数据进行操作。</p>
+<p>实现步骤：</p>
+<ol>
+<li>将属性私有化private</li>
+<li>提供公共（public）的set方法，用于对属性判断并赋值</li>
+<li>提供（public）的get方法，用于获取属性的值</li>
+</ol>
+<p>注意：我们可以将set方法写在构造器中，这样仍然可以使初始化数据受保护。</p>
+<h2 id="5-继承"><a href="#5-继承" class="headerlink" title="5.继承"></a>5.继承</h2><p>继承可以解决代码复用，子类继承父类中的所有属性和方法，减少大量冗余代码。</p>
+<p>父类又叫超类、基类；子类又叫派生类</p>
+<p>基本语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class 子类名 extends 父类名&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h3><ol>
+<li>子类继承了所有属性和方法，但私有属性和方法不能在子类中直接访问，要通过公共的方法去访问。</li>
+<li>当创建子类对象时，默认情况下总会去调用父类的无参构造器，如果父类没有无参构造器，则必须在子类的构造器中用super去指定使用父类的哪个构造器完成对父类的初始化工作，否则编译不会通过。</li>
+<li>super指定构造器方法：<strong>super(参数列表)</strong></li>
+<li>super指定构造器时，必须放在子类构造器的第一行。（super指定构造器只能写在子类构造器中）</li>
+<li>super()和this()都只能放在构造器第一行，因此这两个方法不能共存在一个构造器。</li>
+<li>Java所有类都是Object类的子类，Object是所有类的基类。</li>
+<li>父类构造器的调用不限于直接父类！将一直往上追溯到Object类（顶级父类）</li>
+<li>Java中是<strong>单继承机制</strong>，即一个子类最多只能直接继承一个父类</li>
+</ol>
+<h3 id="属性-x2F-方法访问规则："><a href="#属性-x2F-方法访问规则：" class="headerlink" title="属性&#x2F;方法访问规则："></a>属性&#x2F;方法访问规则：</h3><ol>
+<li>首先看子类是否有该属性</li>
+<li>如果子类有这个属性，并且可以访问，则返回信息</li>
+<li>如果子类没有这个属性，就看父类有没有这个属性（如果父类有该属性，并且可以访问，就返回信息……）</li>
+<li>如果父类没有该属性，就按照（3）的规则，继续找上级父类，直到Object。</li>
+</ol>
+<h3 id="创建子类内存变化"><a href="#创建子类内存变化" class="headerlink" title="创建子类内存变化"></a>创建子类内存变化</h3><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210616221546.png" alt="image-20210616221546288"></p>
+<h2 id="6-super"><a href="#6-super" class="headerlink" title="6.super"></a>6.super</h2><p>super代表父类的引用，用于访问父类的属性、方法、构造器。super访问父类属性和方法时不能访问private属性；super访问父类构造器时，只能出现在子类构造器的第一句，且只能出现一句。</p>
+<p>特别作用：可以绕过本类，直接访问父类的重名属性或方法。</p>
+<p>补充：上面知识点继承有对super的描述，这里不重复写了。</p>
+<h2 id="7-Override——重写"><a href="#7-Override——重写" class="headerlink" title="7.Override——重写"></a>7.Override——重写</h2><p>方法重写也叫方法覆盖，需要满足下面的条件</p>
+<ol>
+<li>子类的方法的<strong>参数、方法名称</strong>，要和父类方法的参数、方法名称完全一样。</li>
+<li>子类方法的返回类型和父类方法返回类型一样，或者是父类返回类型的子类</li>
+<li>子类方法不能缩小父类方法的访问权限</li>
+</ol>
+<blockquote>
+<p>注意：private、static、final方法不能重写</p>
+</blockquote>
+<h3 id="重载和重写的区别"><a href="#重载和重写的区别" class="headerlink" title="重载和重写的区别"></a>重载和重写的区别</h3><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210616230401.png" alt="image-20210616230401209"></p>
+<h2 id="8-多态"><a href="#8-多态" class="headerlink" title="8.多态"></a>8.多态</h2><p>多态基本写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// animal 编译类型是Animal，运行类型是Dog</span></span><br><span class="line"><span class="type">Animal</span> <span class="variable">animal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br></pre></td></tr></table></figure>
+
+<p>多态可以提高代码复用性，有利于维护，比如，定义一个父类作为参数的方法，这个可以接收任何所有子类，不必为每一种类重载这个方法。</p>
+<p>初识多态</p>
+<ol>
+<li>一个对象的编译类型和运行类型可以不一致。</li>
+<li>编译类型在定义对象时，就确定了，不能改变。</li>
+<li>运行类型是可以变化的。</li>
+<li>编译类型看定义时 &#x3D; 号的左边，运行类型看 &#x3D; 号的右边。</li>
+</ol>
+<h3 id="向上转型"><a href="#向上转型" class="headerlink" title="向上转型"></a>向上转型</h3><p>最常见的多态形式，本质是父类的应用指向了子类的对象。</p>
+<p>语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类类型 引用名 = <span class="keyword">new</span> 子类类型();</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ol>
+<li>可以调用父类中的所有成员（需遵守访问权限）</li>
+<li>不能调用子类中的特有成员。（因为在编译阶段，能调用哪些成员，是由编译类型决定的）</li>
+<li>最终运行效果看运行类型的具体实现，即在运行时，按照从运行类型开始查找方法。</li>
+</ol>
+<p>注意属性没有重写之说！属性的值看编译类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Base</span> <span class="variable">base</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">System.out.println(base.count); <span class="comment">// 这个count看编译类型Base的count</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h3><p>向上转型不能访问运行类型的特有成员，但可以通过向下转型访问。</p>
+<p>语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">子类类型 引用名 = (子类类型)父类引用;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：要求父类的引用必须指向的是当前目标类型的对象。</p>
+</blockquote>
+<h3 id="instanceof-比较操作符"><a href="#instanceof-比较操作符" class="headerlink" title="instanceof 比较操作符"></a>instanceof 比较操作符</h3><p>用于判断对象的运行类型是否为XX类型或XX类型的子类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BB extends AA</span></span><br><span class="line"></span><br><span class="line"><span class="type">BB</span> <span class="variable">bb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BB</span>();</span><br><span class="line">System.out.println(bb <span class="keyword">instanceof</span> BB); <span class="comment">// true</span></span><br><span class="line">System.out.println(bb <span class="keyword">instanceof</span> AA); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// aa编译类型AA，运行类型是BB</span></span><br><span class="line"><span class="type">AA</span> <span class="variable">aa</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BB</span>();</span><br><span class="line">System.out.println(aa <span class="keyword">instanceof</span> AA); <span class="comment">// true</span></span><br><span class="line">System.out.println(aa <span class="keyword">instanceof</span> BB); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Java的动态绑定机制"><a href="#Java的动态绑定机制" class="headerlink" title="Java的动态绑定机制"></a>Java的动态绑定机制</h3><ol>
+<li>当调用对象方法的时候，该方法会和该对象的<strong>内存地址&#x2F;运行类型</strong>绑定。即调用方法看运行类型</li>
+<li>当调用对象属性时，没有动态绑定机制，在哪里声明，就在哪里使用。只考虑作用域。</li>
+</ol>
+<h3 id="多态数组"><a href="#多态数组" class="headerlink" title="多态数组"></a>多态数组</h3><p>数组参数的定义类型为父类类型，里面保存的实际元素类型为子类类型。因为有多个子类，所有这样的数组可以存放多种类型。</p>
+<h2 id="9-Object类"><a href="#9-Object类" class="headerlink" title="9.Object类"></a>9.Object类</h2><h3 id="equals方法和-x3D-x3D"><a href="#equals方法和-x3D-x3D" class="headerlink" title="equals方法和 &#x3D;&#x3D;"></a>equals方法和 &#x3D;&#x3D;</h3><p>&#x3D;&#x3D;是一个比较运算符，既可以判断基本类型，又可以判断引用类型</p>
+<ol>
+<li>判断基本类型，判断的是值是否相等</li>
+<li>判断引用类型，判断的是地址是否相等，即判定是不是同一个对象。</li>
+</ol>
+<p>注意：不同引用类型使用&#x3D;&#x3D;比较会编译错误。</p>
+<p>equals是Object类中的方法，只能判断引用类型，判断的是<strong>地址是否相等</strong>。</p>
+<p>在Object类中的equals源码为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通常子类中会重写该方法，用于判断<strong>内容是否相等</strong>。比如String类中对equals方法的重写为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object anObject)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">anotherString</span> <span class="operator">=</span> (String)anObject;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> value.length;</span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="type">char</span> v1[] = value;</span><br><span class="line">            <span class="type">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="hashCode方法"><a href="#hashCode方法" class="headerlink" title="hashCode方法"></a>hashCode方法</h3><p>hashCode方法得到的是一个哈希码值</p>
+<p>先看用法，hashCode()的调用示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HashCode_</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">AA</span> <span class="variable">aa</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AA</span>();</span><br><span class="line">        <span class="type">AA</span> <span class="variable">aa2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AA</span>();</span><br><span class="line">        <span class="type">AA</span> <span class="variable">aa3</span> <span class="operator">=</span> aa;</span><br><span class="line">        System.out.println(<span class="string">&quot;aa.hashCode()=&quot;</span> + aa.hashCode());</span><br><span class="line">        System.out.println(<span class="string">&quot;aa2.hashCode()=&quot;</span> + aa2.hashCode());</span><br><span class="line">        System.out.println(<span class="string">&quot;aa3.hashCode()=&quot;</span> + aa3.hashCode());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AA</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>实际上，由Object类定义的hashCode方法会针对不同的对象返回不同的整数。</p>
+<ol>
+<li>可以提高具有哈希结构的容器效率</li>
+<li>两个指向同一个对象的引用，哈希值肯定是一样的。</li>
+<li>两个指向不同对象的引用，哈希值大概率是不一样的。</li>
+<li>哈希值主要根据地址号来的，但不能将哈希值等价于地址。</li>
+</ol>
+<h3 id="toString方法"><a href="#toString方法" class="headerlink" title="toString方法"></a>toString方法</h3><p>从Object类中的继承下来的默认的toString方法，返回值为：全类名+@+哈希值的十六进制。</p>
+<p>toString方法在Object类中的源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> getClass().getName() + <span class="string">&quot;@&quot;</span> + Integer.toHexString(hashCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当直接输出一个对象时，toString方法会被默认调用。</p>
+<h3 id="finalize方法"><a href="#finalize方法" class="headerlink" title="finalize方法"></a>finalize方法</h3><p>当对象被回收时，系统自动调用对象的finalize方法，子类可以重写该方法，做一些释放资源的操作。</p>
+<p>那么对象什么时候被回收呢？当某个对象没有任何引用时，则jvm就认为这个对象是一个垃圾，就会使用垃圾回收机制来销毁对象，在销毁对象前，会先调用finalize方法。</p>
+<p>垃圾回收机制的调用，是由系统来决定（即有自己的GC算法），也可以通过System.gc()主动触发垃圾回收机制。</p>
+<h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><p>常用快捷键</p>
+<p>F7：跳入方法内</p>
+<p>F8：逐行执行代码</p>
+<p>shift + F8：跳出方法</p>
+<p>F9：执行到下一个</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/" rel="prev" title="Java学习笔记02">
+                  <i class="fa fa-chevron-left"></i> Java学习笔记02
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/" rel="next" title="Java学习笔记04">
+                  Java学习笔记04 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关键字：会话技术、cookie、session、jsp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb学习笔记04">
+<meta property="og:url" content="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="关键字：会话技术、cookie、session、jsp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210907224647.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210908110957.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210908131245.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.817Z">
+<meta property="article:modified_time" content="2021-09-14T11:39:23.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210907224647.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/","path":"2022/08/16/JavaWeb学习笔记04/","title":"JavaWeb学习笔记04"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaWeb学习笔记04 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="nav-number">1.</span> <span class="nav-text">1.会话技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Cookie"><span class="nav-number">2.</span> <span class="nav-text">2.Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie%E7%BB%86%E8%8A%82"><span class="nav-number">2.2.</span> <span class="nav-text">cookie细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Session"><span class="nav-number">3.</span> <span class="nav-text">3.Session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%86%E8%8A%82"><span class="nav-number">3.2.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session%E5%92%8Ccookie%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.3.</span> <span class="nav-text">session和cookie的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-JSP%E5%85%A5%E9%97%A8"><span class="nav-number">4.</span> <span class="nav-text">4.JSP入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp%E8%84%9A%E6%9C%AC"><span class="nav-number">4.1.</span> <span class="nav-text">jsp脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.2.</span> <span class="nav-text">jsp内置对象</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B004/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaWeb学习笔记04 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaWeb学习笔记04
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-14 19:39:23" itemprop="dateModified" datetime="2021-09-14T19:39:23+08:00">2021-09-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关键字：会话技术、cookie、session、jsp</p>
+<span id="more"></span>
+
+<h2 id="1-会话技术"><a href="#1-会话技术" class="headerlink" title="1.会话技术"></a>1.会话技术</h2><p>会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止，一次会话中包含多次请求和响应</p>
+<p>功能：在一次会话的范围内的多次请求间，共享数据</p>
+<p>方式：</p>
+<ol>
+<li>客户端会话技术：Cookie</li>
+<li>服务器会话技术：Session</li>
+</ol>
+<h2 id="2-Cookie"><a href="#2-Cookie" class="headerlink" title="2.Cookie"></a>2.Cookie</h2><p>Cookie是一种客户端会话技术，将数据保存到客户端，用于实现一次会话多次请求间的通信。</p>
+<p>由服务器创建Cookie，把Cookie封装到响应头Set-Cookie中发送给客服端，客户端再次向发送服务器请求携带cookie数据，服务器就能在这次请求得到上次请求的数据了</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210907224647.png" alt="image-20210907224645279"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol>
+<li><p>new Cookie(String name, String value) ：创建Cookie对象，绑定数据</p>
+</li>
+<li><p>response.addCookie(Cookie cookie) ：把cookie设置到响应头</p>
+</li>
+<li><p>Cookie[]  request.getCookies()  ：获取Cookie，拿到数据</p>
+</li>
+<li><p>cookie.setMaxAge(int seconds)：设置cookie的存活时间</p>
+<ul>
+<li>正数：将cookie数据写到硬盘文件中，持久化存储。并把参数作为cookie存活的秒数，时间过短可能在会话结束前就销毁</li>
+<li>负数：默认值，会话结束，cookie自动销毁</li>
+<li>零：销毁存活时间未到的cookie</li>
+</ul>
+</li>
+<li><p>cookie.setPath(String path)：设置cookie的获取范围。默认值是当前的虚拟目录，设置为”&#x2F;“代表部署到tomcat下的所有web项目共享</p>
+</li>
+<li><p>cookie.setDomain(String path)：如果设置一级域名相同，那么多个服务器之间cookie可以共享</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie.setDomain(<span class="string">&quot;.baidu.com&quot;</span>);  <span class="comment">// 那么tieba.baidu.com和news.baidu.com中cookie可以共享</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="cookie细节"><a href="#cookie细节" class="headerlink" title="cookie细节"></a>cookie细节</h3><ol>
+<li>一次可以发送多个cookie，只需要创建多个Cookie对象，用response调用多次addCookie方法即可</li>
+<li>默认情况下，浏览器关闭后，cookie数据被销毁（会话结束）</li>
+<li>在tomcat 8 之前 cookie中不能直接存储中文数据，需要将中文数据转码—一般采用URL编码(%E3)</li>
+<li>在tomcat 8 之后，cookie支持中文数据。特殊字符还是不支持，建议使用URL编码存储，URL解码解析<ul>
+<li>URLEncoder.encode(String s, String enc)</li>
+<li>URLDecoder.decode(String s, String enc)</li>
+</ul>
+</li>
+<li>在一个tomcat服务器中，部署多个web项目，默认情况下这些web项目的cookie不能共享，可以设置cookie.setPath(String path)为”&#x2F;“，使这些web项目共享这条cookie数据</li>
+<li>默认情况下，不同tomcat服务器的cookie不能共享，想要共享需要setDomain方法设置</li>
+</ol>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li>cookie存储数据在客户端浏览器</li>
+<li>浏览器对于单个cookie 的大小有限制(一般4kb左右) 以及 对同一个域名下的总cookie数量也有限制(一般20个以内)</li>
+</ol>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ol>
+<li>客户端安全级别较低，cookie一般用于存出少量的不太敏感的数据</li>
+<li>在不登录的情况下，完成服务器对客户端的身份识别</li>
+</ol>
+<h2 id="3-Session"><a href="#3-Session" class="headerlink" title="3.Session"></a>3.Session</h2><p>Session使一种服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象中</p>
+<p>Session是依赖于cookie的，为了保证每次客户端访问能够找到自己的session数据，服务器在保存session数据的同时，为session生成一个唯一的id，并把这个id以cookie的形式传给客户端，客户端下次请求把cookie再传回来，服务器就可以在新的请求找到客户端的session数据了</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210908110957.png" alt="image-20210908110957757"></p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ol>
+<li>HttpSession session &#x3D; request.getSession()：获取session对象</li>
+<li>void setAttribute(String name, Object value)：设置session数据</li>
+<li>Object getAttribute(String name) ：获取session数据</li>
+<li>void removeAttribute(String name)：删除session数据</li>
+</ol>
+<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><ol>
+<li>默认情况下，客户端关闭，就不能获取到session的数据了，因为会话结束，cookie就销毁了，就不能再向服务器发送session的id</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现客户端关闭，下次仍能获取session数据</span></span><br><span class="line"><span class="type">Cookie</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;JSESSIONID&quot;</span>,session.getId());</span><br><span class="line">c.setMaxAge(<span class="number">60</span>*<span class="number">60</span>);</span><br><span class="line">response.addCookie(c);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>默认情况下，服务器关闭，就不能获取到session的数据了，因为session数据保存在服务器的内存中，服务器关闭，内存中的数据会被销毁。想要持久化保存session，需要对session钝化、再活化</p>
+<ul>
+<li>钝化：服务器正常关闭之前，将session对象序列化到硬盘上</li>
+<li>活化：在启功服务器后，将session文件转化为内存中的session对象即可，这样得到的session对象能保证数据不变，但是内存地址不一样了</li>
+</ul>
+<blockquote>
+<p>钝化的session文件在work目录下，tomcat正常关闭和启动时，会自动帮我们完成钝化和活化，使用集成到idea的tomcat也能在生成的配置文件目录的我认得文件夹下完成钝化，但是无法正确的活化，活化时会先删除掉这个我work文件夹，重新创建一个</p>
+</blockquote>
+</li>
+<li><p>session销毁时机</p>
+<ul>
+<li><p>服务器关闭</p>
+</li>
+<li><p>session对象调用invalidate()方法</p>
+</li>
+<li><p>session默认失效时间：30分钟</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--在conf/web.xml下修改默认失效时间--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>session可以存储任意类型、任意大小的数据</li>
+</ol>
+<h3 id="session和cookie的区别"><a href="#session和cookie的区别" class="headerlink" title="session和cookie的区别"></a>session和cookie的区别</h3><ol>
+<li>session存储数据在服务器端，cookie在客户端</li>
+<li>session没有数据大小限制，cookie有</li>
+<li>session数据安全，cookie相对于不安全</li>
+</ol>
+<h2 id="4-JSP入门"><a href="#4-JSP入门" class="headerlink" title="4.JSP入门"></a>4.JSP入门</h2><p>JSP： Java Sever Pages，Java服务器端页面，可以理解为一个特殊页面，其中既可以指定定义html标签，又可以定义java代码</p>
+<p>jsp本质上是一个Sevlet，tomcat会将jsp文件转化为一个java文件，保存到生成的配置文件目录的work文件夹下，并将其编译成class文件，这个自动生成的类继承HttpJspBase类，而HttpJspBase类实现了Servlet</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210908131245.png" alt="image-20210908131244968"></p>
+<h3 id="jsp脚本"><a href="#jsp脚本" class="headerlink" title="jsp脚本"></a>jsp脚本</h3><p>jsp会转换成一个servlet类，因此也有service方法</p>
+<ol>
+<li>&lt;% 代码 %&gt;：定义java代码，在service方法中，service方法中可以定义什么，该脚本就可以定义什么</li>
+<li>&lt;%! 代码 %&gt;：定义的java代码，在jsp转换后的java类的成员位置</li>
+<li>&lt;%&#x3D; 代码 %&gt;：定义的java代码，会输出到页面上，输出语句可以定义什么，该脚本就可以定义什么</li>
+</ol>
+<h3 id="jsp内置对象"><a href="#jsp内置对象" class="headerlink" title="jsp内置对象"></a>jsp内置对象</h3><p>这是在jsp页面中不需要获取和创建，可以直接使用的对像，一共有9个</p>
+<ol>
+<li>request</li>
+<li>response</li>
+<li>out：字符输出流对象，可以将数据输出到页面上，和response.getWriter()类似，但是也存在不同<ul>
+<li>response.getWriter()数据输出永远在out.write()之前</li>
+<li>因为在tomcat服务器真正给客户端做出相应之前，会先找response缓冲区数据，再找out缓冲区数据</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/" rel="prev" title="JavaWeb学习笔记03">
+                  <i class="fa fa-chevron-left"></i> JavaWeb学习笔记03
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B005/" rel="next" title="JavaWeb学习笔记05">
+                  JavaWeb学习笔记05 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

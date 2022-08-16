@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关键字：Tomcat、Servlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb学习笔记02">
+<meta property="og:url" content="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="关键字：Tomcat、Servlet">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903170009.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903200437.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903204213.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903204812.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903205247.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903205956.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903211213.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903211526.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903215750.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210905133347.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.804Z">
+<meta property="article:modified_time" content="2021-09-05T05:43:20.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903170009.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/","path":"2022/08/16/JavaWeb学习笔记02/","title":"JavaWeb学习笔记02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaWeb学习笔记02 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1.web相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-web%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2.web服务器软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Tomcat"><span class="nav-number">3.</span> <span class="nav-text">3.Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.3.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD"><span class="nav-number">3.4.</span> <span class="nav-text">关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.5.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.6.</span> <span class="nav-text">动态项目目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0IDEA"><span class="nav-number">3.7.</span> <span class="nav-text">部署到IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AAJava-EE%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.8.</span> <span class="nav-text">开始一个Java EE项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-IDEA%E4%B8%8Etomcat%E7%9A%84%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">4.IDEA与tomcat的相关配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Servlet"><span class="nav-number">5.</span> <span class="nav-text">5.Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet%E5%85%A5%E9%97%A8"><span class="nav-number">5.1.</span> <span class="nav-text">Servlet入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84"><span class="nav-number">5.2.</span> <span class="nav-text">注解配置资源路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">实现的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GenericServlet%E5%92%8CHttpServlet"><span class="nav-number">5.4.</span> <span class="nav-text">GenericServlet和HttpServlet</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaWeb学习笔记02 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaWeb学习笔记02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-05 13:43:20" itemprop="dateModified" datetime="2021-09-05T13:43:20+08:00">2021-09-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关键字：Tomcat、Servlet</p>
+<span id="more"></span>
+
+<h2 id="1-web相关概念"><a href="#1-web相关概念" class="headerlink" title="1.web相关概念"></a>1.web相关概念</h2><p><strong>软件架构</strong></p>
+<ol>
+<li>C&#x2F;S：客户端&#x2F;服务器端</li>
+<li>B&#x2F;S：浏览器&#x2F;服务器端</li>
+</ol>
+<p><strong>网络通信三要素</strong></p>
+<ol>
+<li><p>IP：电子设备(计算机)在网络中的唯一标识。</p>
+</li>
+<li><p>端口：应用程序在计算机中的唯一标识。 0~65536</p>
+</li>
+<li><p>传输协议：规定了数据传输的规则</p>
+</li>
+</ol>
+<ul>
+<li><p>tcp:安全协议，三次握手。 速度稍慢</p>
+</li>
+<li><p>udp：不安全协议。 速度快</p>
+</li>
+</ul>
+<p><strong>资源分类</strong></p>
+<ol>
+<li>静态资源：所有用户访问后，得到的结果都是一样的，称为静态资源，静态资源可以直接被浏览器解析。如：html、css、JavaScript</li>
+<li>动态资源：每个用户访问相同资源后，得到的结果可能不一样，称为动态资源。动态资源被访问后，需要先转换为静态资源，再返回给浏览器。如servlet&#x2F;jsp、php、asp</li>
+</ol>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903170009.png" alt="image-20210903170002088"></p>
+<h2 id="2-web服务器软件"><a href="#2-web服务器软件" class="headerlink" title="2.web服务器软件"></a>2.web服务器软件</h2><p>服务器软件：可以接受用户请求，并处理请求，做出相应的软件</p>
+<p>服务器：安装了服务器的软件的计算机</p>
+<p>web服务器软件：一样可以处理用户请求，在web服务器软件中，可以部署web项目，让用户通过浏览器访问这些项目</p>
+<p>JavaEE：Java语言在企业级开发中使用的技术规范的总和，一共规定了13项大的规范</p>
+<p><strong>常见Java相关的web服务器软件</strong></p>
+<ol>
+<li>weblogic：oracle公司，大型的JavaEE服务器，支持所有JavaEE规范，收费的</li>
+<li>webSphere：IBM公司，大型的JavaEE服务器，支持所有JavaEE规范，收费的</li>
+<li>JBOSS：JBOSS公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的</li>
+<li>Tomcat：Apache基金组织，中小型的JavaEE服务器，仅仅支持少量的JavaEE规范servlet&#x2F;jsp，开源的，免费的</li>
+</ol>
+<h2 id="3-Tomcat"><a href="#3-Tomcat" class="headerlink" title="3.Tomcat"></a>3.Tomcat</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a target="_blank" rel="noopener" href="http://tomcat.apache.org/">http://tomcat.apache.org/</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>解压压缩包即可，注意安装目录建议不要有中文和空格</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903200437.png" alt="image-20210903200436943"></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>双击安装目录下的bin&#x2F;startup.bat即可，在浏览器输入<a href="http://localhost:8080访问自己，访问别人的把localhost换成ip地址">http://localhost:8080访问自己，访问别人的把localhost换成ip地址</a></p>
+<p><strong>可能出现的问题</strong></p>
+<ol>
+<li><p>黑窗口一闪而过</p>
+<ul>
+<li>原因：没有配置正确的JAVA_HOME环境变量，tomcat会根据环境变量JAVA_HOME寻找jdk</li>
+<li>解决方法：配置JAVA_HOME环境变量</li>
+</ul>
+</li>
+<li><p>启动报错</p>
+<ul>
+<li><p>原因：8080端口被占用</p>
+</li>
+<li><p>解决方法一：用 netstat -ano 命令找到占用8080端口程序的uid，在任务管理器根据uid关闭掉这个程序</p>
+</li>
+<li><p>解决方法二：修改tomcat的端口，在conf&#x2F;server.xml中修改</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>把端口修改成80，访问时就不用输入端口号了，因为80端口号是http协议的默认端口号</p>
+</blockquote>
+<h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><ol>
+<li>正常关闭：两种方法<ul>
+<li>bin&#x2F;shutdown.bat</li>
+<li>ctrl+c</li>
+</ul>
+</li>
+<li>强制关闭：关闭黑窗口</li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>三种配置方法，不过一般用第三种</p>
+<p><strong>第一种</strong></p>
+<p>直接把项目文件夹放入webapps文件夹，或者将项目打包成war包，放入webapps文件夹（war包会自动解压）</p>
+<p>访问新添加的项目，浏览器地址中加上项目名（虚拟目录）和文件名，比如要访问的是&#x2F;webapps&#x2F;hello&#x2F;hello.html，输入的地址就应该是<a target="_blank" rel="noopener" href="http://localhost:8080//hello/hello.html">http://localhost:8080//hello/hello.html</a></p>
+<p><strong>第二种</strong></p>
+<p>第一种方式无论是否打包，最终都要把项目文件放入webapps文件夹，如果不想这样做，可以配置conf&#x2F;server.xml文件，在&lt;Host&gt;标签体中加上下面标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;D:\hello&quot;</span> <span class="attr">path</span>=<span class="string">&quot;/hehe&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>docBase：项目存放的路径</p>
+<p>path：虚拟目录</p>
+</blockquote>
+<p>访问新添加的项目，浏览器地址中加上虚拟目录和文件名</p>
+<p><strong>第三种</strong></p>
+<p>第二种虽然不需要把文件放过去了，但是conf&#x2F;server.xml是总的配置，随意修改容易导致所有的项目都出问题，所以可以在conf\Catalina\localhost创建任意名称的xml文件。在文件中编写</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">&quot;D:\hello&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这时的虚拟目录是xml文件名称，并且是热部署，不用重启tomcat就能生效</p>
+</blockquote>
+<h3 id="动态项目目录结构"><a href="#动态项目目录结构" class="headerlink" title="动态项目目录结构"></a>动态项目目录结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 项目的根目录</span><br><span class="line">    -- WEB-INF目录：</span><br><span class="line">        -- web.xml：web项目的核心配置文件</span><br><span class="line">        -- classes目录：放置字节码文件的目录</span><br><span class="line">        -- lib目录：放置依赖的jar包</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署到IDEA"><a href="#部署到IDEA" class="headerlink" title="部署到IDEA"></a>部署到IDEA</h3><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903204213.png" alt="image-20210903204213181"></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903204812.png" alt="image-20210903204812335"></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903205247.png" alt="image-20210903205247904"></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903205956.png" alt="image-20210903205956643"></p>
+<h3 id="开始一个Java-EE项目"><a href="#开始一个Java-EE项目" class="headerlink" title="开始一个Java EE项目"></a>开始一个Java EE项目</h3><p><strong>创建Java EE项目</strong></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903211213.png" alt="image-20210903211213199"></p>
+<p><strong>点击运行即可启动项目，这时可以访问web目录下的静态资源index.jsp（也可以自己创建html文件）</strong></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903211526.png" alt="image-20210903211526052"></p>
+<h2 id="4-IDEA与tomcat的相关配置"><a href="#4-IDEA与tomcat的相关配置" class="headerlink" title="4.IDEA与tomcat的相关配置"></a>4.IDEA与tomcat的相关配置</h2><ol>
+<li><p>IDEA会为每一个tomcat部署的项目单独建立一份配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看控制台的log：Using CATALINA_BASE:   &quot;C:\Users\Coder\AppData\Local\JetBrains\IntelliJIdea2020.1\tomcat\Tomcat_8_5_70_chapter27_2&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tomcat真正访问的是\out\artifacts的内容</p>
+</li>
+<li><p>WEB-INF目录下的资源不能被浏览器直接访问</p>
+</li>
+</ol>
+<h2 id="5-Servlet"><a href="#5-Servlet" class="headerlink" title="5.Servlet"></a>5.Servlet</h2><p>Servlet（server applet）意思是运行在服务器端的小程序，Servlet就是一个接口，定义了Java类被浏览器访问到(tomcat识别)的规则。将来我们自定义一个类，实现Servlet接口，复写方法。</p>
+<h3 id="Servlet入门"><a href="#Servlet入门" class="headerlink" title="Servlet入门"></a>Servlet入门</h3><ol>
+<li>创建Java EE项目</li>
+<li>定义一个类，实现Servlet接口</li>
+<li>实现接口中的抽象方法</li>
+<li>在WEB-INF&#x2F;web.xml中配置Servlet（Servlet3.0之后可以用注解）</li>
+<li>每次访问虚拟目录，实现的service方法就会被调用一次</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">version</span>=<span class="string">&quot;4.0&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 自定义servlet名 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- Servlet全限定类名 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.lsgstudy.servlet.Servlet01<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 上面的自定义servlet名 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 资源路径 --&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行原理</strong></p>
+<ol>
+<li>当服务器接受到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径</li>
+<li>查找web.xml文件，是否有对应的&lt;url-pattern&gt;标签体内容。</li>
+<li>如果有，则在找到对应的&lt;servlet-class&gt;全类名</li>
+<li>tomcat会将字节码文件加载进内存，并且创建其对象</li>
+<li>调用其方法</li>
+</ol>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210903215750.png" alt="image-20210903215750837"></p>
+<h3 id="注解配置资源路径"><a href="#注解配置资源路径" class="headerlink" title="注解配置资源路径"></a>注解配置资源路径</h3><p>使用web.xml配置指定Servlet的位置，每创建一个servlet就需要在web.xml中添加一对标签，如果有大量的servlet就会很麻烦；在Servlet3.0（Java EE 6）之后，可以用注解实现这个功能，不再需要配置web.xml文件来指定Servlet的位置</p>
+<p>用法非常简单，只需要在Serlet实现类上使用@WebServlet注解，进行配置即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;资源路径&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>资源路径写法</strong></p>
+<ol>
+<li>&#x2F;xxx：路径匹配</li>
+<li>&#x2F;xxx&#x2F;xxx:多层路径，目录结构</li>
+<li>*.do：扩展名匹配</li>
+<li>&#x2F;*：任意路径</li>
+</ol>
+<blockquote>
+<p>优先级：如果匹配不到1、2才会匹配4，4的优先级大于3，即有4存在，3就不会匹配到</p>
+</blockquote>
+<p>一个Servlet可以对应多个路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&#123;&quot;/d4&quot;,&quot;/dd4&quot;,&quot;/ddd4&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>WebServlet注解源码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> WebServlet &#123;</span><br><span class="line">    String <span class="title function_">name</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>; <span class="comment">//相当于&lt;Servlet-name&gt;</span></span><br><span class="line"></span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;; <span class="comment">//代表urlPatterns()属性配置</span></span><br><span class="line"></span><br><span class="line">    String[] urlPatterns() <span class="keyword">default</span> &#123;&#125;; <span class="comment">//相当于&lt;url-pattern&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">loadOnStartup</span><span class="params">()</span> <span class="keyword">default</span> -<span class="number">1</span>; <span class="comment">//相当于&lt;load-on-startup&gt;</span></span><br><span class="line"></span><br><span class="line">    WebInitParam[] initParams() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">asyncSupported</span><span class="params">()</span> <span class="keyword">default</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">smallIcon</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">largeIcon</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">description</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">displayName</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现的方法"><a href="#实现的方法" class="headerlink" title="实现的方法"></a>实现的方法</h3><ol>
+<li>init(ServletConfig servletConfig)：初始化方法，在Servlet被创建时执行，只会执行一次</li>
+<li>getServletConfig()：获取ServletConfig对象</li>
+<li>service(ServletRequest servletRequest, ServletResponse servletResponse)：提供服务方法，每一次Servlet被访问，就会执行一次</li>
+<li>getServletInfo()：获取Servlet的一些信息，如版本、作者等等</li>
+<li>destroy()：销毁方法，在服务器正常关闭时，执行一次</li>
+</ol>
+<p><strong>细节讨论</strong></p>
+<ol>
+<li><p>init方法只执行一次，说明Servlet在内存中只存在一个对象，Servlet是单例的，为了避免线程安全问题，应该尽量不要在Servlet中定义成员变量，即使定义了成员变量，也只用，而不要修改</p>
+</li>
+<li><p>默认情况下，第一次被访问时，Servlet被创建，可以配置web.xml改变Servlet的创建时机</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在<span class="tag">&lt;<span class="name">servlet</span>&gt;</span>标签下配置</span><br><span class="line">1. 第一次被访问时创建</span><br><span class="line">	* <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>中的值设为负数</span><br><span class="line">2. 在服务器启动时创建</span><br><span class="line">	* <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>中的值设为0或正整数</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>只有服务器正常关闭时，destroy方法才会执行</li>
+<li>destroy方法是在Servlet被销毁之前执行的</li>
+</ol>
+<h3 id="GenericServlet和HttpServlet"><a href="#GenericServlet和HttpServlet" class="headerlink" title="GenericServlet和HttpServlet"></a>GenericServlet和HttpServlet</h3><p>实现Servlet接口就必须实现5个抽象方法，但实际上除了service方法，其他基本是用不到的，所以可以我们通常不直接实现Servlet接口，而是继承已经实现Servlet接口的子类</p>
+<p>GenericServlet类是抽象类，它实现了Servlet接口，并对除service方法的其他4个方法进行了空实现，service方法保持抽象方法，这样一来，如果继承GenericServlet类，就不需要实现service之外的方法了</p>
+<p>HttpServlet是GenericServlet的子类，我们每次实现service方法都要区分收到的是post请求还是get请求，根据不同的请求编写不同的代码，这样的重复工作在HttpServlet类中帮我们实现了，在HttpServlet类中，实现了service方法，并判断请求方式，如果是post请求就调用doPost方法，如果是get请求就调用doGet方法，实现请求的分发。这样一来，如果继承HttpServlet类，只需根据需要重写doPost方法和doGet方法就可以了</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210905133347.png" alt="image-20210905133345879"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" rel="prev" title="JavaWeb学习笔记01">
+                  <i class="fa fa-chevron-left"></i> JavaWeb学习笔记01
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003/" rel="next" title="JavaWeb学习笔记03">
+                  JavaWeb学习笔记03 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="知识点：什么是jdk、数据类型、类型转换、常见编码、运算符、2进制、位运算、控制结构（分支结构、循环结构）、数组、冒泡排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习笔记01">
+<meta property="og:url" content="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="知识点：什么是jdk、数据类型、类型转换、常见编码、运算符、2进制、位运算、控制结构（分支结构、循环结构）、数组、冒泡排序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210319234504.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210320000151.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210322173150.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210322173442.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210330221030.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210330225216.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.863Z">
+<meta property="article:modified_time" content="2021-06-19T01:53:45.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210319234504.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/","path":"2022/08/16/Java学习笔记01/","title":"Java学习笔记01"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java学习笔记01 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-jdk%E5%8C%85%E5%90%AB%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">1.jdk包含内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java%E5%9F%BA%E7%A1%80%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">2.Java基础注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Java%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3. Java学习方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">4.数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Java%E7%B1%BB%E7%9A%84%E7%BB%84%E7%BB%87%E5%BD%A2%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">5.Java类的组织形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B8%B8%E8%A7%81%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">6.常见字符编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">7.</span> <span class="nav-text">7.自动类型转换注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-String%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BA%92%E8%BD%AC"><span class="nav-number">8.</span> <span class="nav-text">8.String和基本数据类型互转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%8F%96%E6%A8%A1%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">9.</span> <span class="nav-text">9.%取模的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%92%8C%E2%80%93%E8%BF%90%E7%AE%97%E7%9A%84%E6%98%93%E9%94%99%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text">10.++和–运算的易错点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-amp-amp-%E5%92%8C-amp-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">11.</span> <span class="nav-text">11.&amp;&amp;和&amp;的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%9A%E8%BF%9B%E8%A1%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">12.</span> <span class="nav-text">12.复合赋值运算符会进行类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E5%9B%9B%E7%A7%8D%E8%BF%9B%E5%88%B6"><span class="nav-number">13.</span> <span class="nav-text">13.四种进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%8E%9F%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%EF%BC%88%E9%87%8D%E7%82%B9-%E9%9A%BE%E7%82%B9%EF%BC%89"><span class="nav-number">14.</span> <span class="nav-text">14.原码、反码、补码（重点 难点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">15.</span> <span class="nav-text">15.位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-%E6%8E%A5%E6%94%B6%E8%BE%93%E5%85%A5%E5%AD%97%E7%AC%A6"><span class="nav-number">16.</span> <span class="nav-text">16.接收输入字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-switch%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">17.</span> <span class="nav-text">17.switch注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-break%E7%89%B9%E6%AE%8A%E4%BD%BF%E7%94%A8"><span class="nav-number">18.</span> <span class="nav-text">18.break特殊使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">19.</span> <span class="nav-text">19.数组的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-%E6%95%B0%E7%BB%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">20.</span> <span class="nav-text">20.数组默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-%E6%95%B0%E7%BB%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">21.</span> <span class="nav-text">21.数组注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">22.</span> <span class="nav-text">22.冒泡排序算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%BE%97%E5%88%9B%E5%BB%BA"><span class="nav-number">23.</span> <span class="nav-text">23.二维数组得创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">24.</span> <span class="nav-text">24.二维数组内存分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-%E4%BA%8C%E4%BD%8D%E6%95%B0%E7%BB%84%E6%B3%A8%E6%84%8F"><span class="nav-number">25.</span> <span class="nav-text">25.二位数组注意</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java学习笔记01 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java学习笔记01
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-19 09:53:45" itemprop="dateModified" datetime="2021-06-19T09:53:45+08:00">2021-06-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>知识点：什么是jdk、数据类型、类型转换、常见编码、运算符、2进制、位运算、控制结构（分支结构、循环结构）、数组、冒泡排序</p>
+<span id="more"></span>
+
+<h2 id="1-jdk包含内容"><a href="#1-jdk包含内容" class="headerlink" title="1.jdk包含内容"></a>1.jdk包含内容</h2><p>jdk &#x3D; jre + 开发工具集（如javac，java）</p>
+<p>jre &#x3D; jvm + Java标准类库</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210319234504.png" alt="image-20210319234504792"></p>
+<h2 id="2-Java基础注意事项"><a href="#2-Java基础注意事项" class="headerlink" title="2.Java基础注意事项"></a>2.Java基础注意事项</h2><ol>
+<li>一个源文件最多只能有一个public类，其他类的个数不限。</li>
+<li>如果源文件包含一个public类，则文件名必须按该类名命名。</li>
+<li>编译后，每一个类都有一个字节码文件（.class）文件。</li>
+</ol>
+<h2 id="3-Java学习方法"><a href="#3-Java学习方法" class="headerlink" title="3. Java学习方法"></a>3. Java学习方法</h2><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210320000151.png" alt="image-20210320000151840"></p>
+<h2 id="4-数据类型"><a href="#4-数据类型" class="headerlink" title="4.数据类型"></a>4.数据类型</h2><p>共八种基本数据类型byte,short,int,long,float,double,char,boolean。</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210322173150.png" alt="image-20210322173143376"></p>
+<h2 id="5-Java类的组织形式"><a href="#5-Java类的组织形式" class="headerlink" title="5.Java类的组织形式"></a>5.Java类的组织形式</h2><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210322173442.png" alt="image-20210322173442206"></p>
+<h2 id="6-常见字符编码"><a href="#6-常见字符编码" class="headerlink" title="6.常见字符编码"></a>6.常见字符编码</h2><ol>
+<li><strong>ASCII编码表</strong>：共128个字符，每个字符用1个字节表示；其实1个字节可以表示256个字符，但ASCII编码表只用了128个。</li>
+<li><strong>Unicode</strong>：为了引入更多的字符，每个字符都使用2个字节表示。</li>
+<li><strong>utf-8</strong>：可以理解为对Unicode编码表的优化，字母使用1个字节，汉字使用3个字节。</li>
+<li><strong>gbk</strong>：字母使用1个字节，汉字2个字节</li>
+<li><strong>gbk2312</strong>：可以表示汉字，gbk2312 &lt; gbk</li>
+<li><strong>big5码</strong>：繁体中文，台湾、香港</li>
+</ol>
+<h2 id="7-自动类型转换注意事项"><a href="#7-自动类型转换注意事项" class="headerlink" title="7.自动类型转换注意事项"></a>7.自动类型转换注意事项</h2><ol>
+<li>byte，short和char之间不会互相自动转换。</li>
+<li>byte，short，char他们三者在计算时首先转换为int类型。</li>
+<li>把精度大的数据类型赋值给精度小的数据时，会报错。</li>
+<li>把具体的数赋值给byte时，先判断该数是否在byte范围内，如果是就不会报错。</li>
+</ol>
+<h2 id="8-String和基本数据类型互转"><a href="#8-String和基本数据类型互转" class="headerlink" title="8.String和基本数据类型互转"></a>8.String和基本数据类型互转</h2><ol>
+<li>基本数据类型转String类型：基本类型+””即可。</li>
+<li>String类型转基本数据类型：使用包装类的parseXX方法即可。</li>
+</ol>
+<h2 id="9-取模的本质"><a href="#9-取模的本质" class="headerlink" title="9.%取模的本质"></a>9.%取模的本质</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a % b == a - a / b * b</span><br><span class="line">   <span class="comment">// 注意：当a是小数时，且结果为近似值。</span></span><br><span class="line">   a % b == a - (<span class="type">int</span>)a / b * b</span><br></pre></td></tr></table></figure>
+
+<p>知道%的本质可以更好的理解有负数参与的取模运算。</p>
+<h2 id="10-和–运算的易错点"><a href="#10-和–运算的易错点" class="headerlink" title="10.++和–运算的易错点"></a>10.++和–运算的易错点</h2><p>先看如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    i = i++;</span><br><span class="line">    System.out.println(i);  <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后++，先使用，后自增，很容易理解为i&#x3D;i，然后i++，得到i &#x3D; 2；但实际上上面代码结果为i &#x3D; 1。</p>
+<p>这里其实会有一个临时变量temp；i &#x3D; i++实际过程为</p>
+<p>（1）temp &#x3D; i;（2）i &#x3D; i + 1;（3）i &#x3D; temp;</p>
+<p>所以最终i &#x3D; 1。</p>
+<p>另外，i &#x3D; ++i的执行过程为（1）i &#x3D; i + 1;（2）temp &#x3D; i;（3）i &#x3D; temp。</p>
+<h2 id="11-amp-amp-和-amp-的区别"><a href="#11-amp-amp-和-amp-的区别" class="headerlink" title="11.&amp;&amp;和&amp;的区别"></a>11.&amp;&amp;和&amp;的区别</h2><ol>
+<li>&amp;&amp;叫短路与，如果第一个条件为false，后面的条件不再判断</li>
+<li>&amp;叫逻辑与，如果第一个条件为false，后面条件仍然会判断</li>
+</ol>
+<p>另外，||和|类似。</p>
+<p>补充，^叫逻辑异或，当左右不同时，结果为true，否则为false。</p>
+<h2 id="12-复合赋值运算符会进行类型转换"><a href="#12-复合赋值运算符会进行类型转换" class="headerlink" title="12.复合赋值运算符会进行类型转换"></a>12.复合赋值运算符会进行类型转换</h2><p>按照常识，byte类型数据进行计算会先转为int类型，则在下面代码中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line">b += <span class="number">2</span>;</span><br><span class="line">b++;</span><br></pre></td></tr></table></figure>
+
+<p>若b +&#x3D; 2;理解为b &#x3D; b + 2；的话，肯定会编译错误，但实际上并不会。</p>
+<p>因为b +&#x3D; 2;实际上等价于b  &#x3D; (byte)( b + 2)</p>
+<h2 id="13-四种进制"><a href="#13-四种进制" class="headerlink" title="13.四种进制"></a>13.四种进制</h2><ol>
+<li>二进制：满2进1，以0b或0B开头</li>
+<li>十进制：满10进1</li>
+<li>八进制：满8进1，以0开头表示</li>
+<li>十六进制：满16进1，A(10)-F(15)，以0x或0X开头表示，此处的A-F不区分大小写。</li>
+</ol>
+<h2 id="14-原码、反码、补码（重点-难点）"><a href="#14-原码、反码、补码（重点-难点）" class="headerlink" title="14.原码、反码、补码（重点 难点）"></a>14.原码、反码、补码（重点 难点）</h2><p>记住一下几点</p>
+<ol>
+<li>二进制最高位是符号位：0表示正数，1表示负数。</li>
+<li>正数的原码，反码，补码都一样（三码合一）。</li>
+<li>负数的反码&#x3D;它的原码符号位不变，其他位取反（0-&gt;1,1-&gt;0）</li>
+<li>负数的补码&#x3D;它的反码+1，负数的反码&#x3D;负数的补码-1。</li>
+<li>0的反码，补码都是0。</li>
+<li>java没有无符号数，换言之，java中的数都是有符号的。</li>
+<li>在计算机运算的时候，都是以补码的形式来运算的。</li>
+<li>当我们看运算结果的时候，要看他的原码。</li>
+</ol>
+<h2 id="15-位运算"><a href="#15-位运算" class="headerlink" title="15.位运算"></a>15.位运算</h2><p>java中有7个位运算符（&amp;、|、^、~、&gt;&gt;、&lt;&lt;和&gt;&gt;&gt;）</p>
+<ol>
+<li>按位与&amp;：两位全为1，结果为1，否则为0。</li>
+<li>按位或|：两位有一个为1，结果为1，否则为0</li>
+<li>按位异或^：两位一个为0，一个为1，结果为1，否则为0</li>
+<li>按位取反~：0-&gt;1,1-&gt;0</li>
+<li>算术右移&gt;&gt;：低位溢出，符号位不变，并用符号位补溢出的高位，本质是&#x2F;2</li>
+<li>算术左移&lt;&lt;：符号位不变，低位补0，本质是*2</li>
+<li>逻辑右移（无符号右移）&gt;&gt;&gt;：低位溢出，高位补0</li>
+</ol>
+<p>特别说明：没有&lt;&lt;&lt;符号。</p>
+<p><strong>位运算举例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位运算</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BitOperrator</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="comment">// 2&amp;3</span></span><br><span class="line">		<span class="comment">// 2的原码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 2的反码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 2的补码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 3的补码	00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 按位与 &amp;</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000010	运算后的补码</span></span><br><span class="line">		<span class="comment">// 运算后的原码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 结果就是 2</span></span><br><span class="line">		System.out.println(<span class="number">2</span>&amp;<span class="number">3</span>); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">//============================================================</span></span><br><span class="line">		<span class="comment">// ~-2</span></span><br><span class="line">		<span class="comment">// -2的原码	10000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// -2的反码	11111111 11111111 11111111 11111101</span></span><br><span class="line">		<span class="comment">// -2的补码	11111111 11111111 11111111 11111110</span></span><br><span class="line">		<span class="comment">// 按位取反	00000000 00000000 00000000 00000001	运算后的补码</span></span><br><span class="line">		<span class="comment">// 运算后的原码 00000000 00000000 00000000 00000001</span></span><br><span class="line">		<span class="comment">// 结果就是 1</span></span><br><span class="line">		System.out.println(~-<span class="number">2</span>); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//============================================================</span></span><br><span class="line">		<span class="comment">// ~2</span></span><br><span class="line">		<span class="comment">// 2的补码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 按位取反	11111111 11111111 11111111 11111101 运算后的补码</span></span><br><span class="line">		<span class="comment">// 运算后的反码	11111111 11111111 11111111 11111100</span></span><br><span class="line">		<span class="comment">// 运算后的原码	10000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 结果就是 -3</span></span><br><span class="line">		System.out.println(~<span class="number">2</span>); <span class="comment">// -3</span></span><br><span class="line"><span class="comment">//============================================================</span></span><br><span class="line">		<span class="comment">// 2|3</span></span><br><span class="line">		<span class="comment">// 2的补码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 3的补码	00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 按位或 |</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 00000000 00000000 00000000 00000011	运算后的补码</span></span><br><span class="line">		<span class="comment">// 运算后的原码	00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 结果就是 3</span></span><br><span class="line">		System.out.println(<span class="number">2</span>|<span class="number">3</span>); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">//============================================================</span></span><br><span class="line">		<span class="comment">// 2^3</span></span><br><span class="line">		<span class="comment">// 2的补码	00000000 00000000 00000000 00000010</span></span><br><span class="line">		<span class="comment">// 3的补码	00000000 00000000 00000000 00000011</span></span><br><span class="line">		<span class="comment">// 按位异或	00000000 00000000 00000000 00000001	运算后的补码</span></span><br><span class="line">		<span class="comment">// 运算后的原码	00000000 00000000 00000000 00000001</span></span><br><span class="line">		<span class="comment">// 结果就是 1</span></span><br><span class="line">		System.out.println(<span class="number">2</span>^<span class="number">3</span>); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//============================================================</span></span><br><span class="line">		System.out.println(<span class="number">1</span>&gt;&gt;<span class="number">2</span>); <span class="comment">// 1 / 2 / 2 = 0</span></span><br><span class="line">		System.out.println(<span class="number">1</span>&lt;&lt;<span class="number">2</span>); <span class="comment">// 1 * 2 * 2 = 4</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-接收输入字符"><a href="#16-接收输入字符" class="headerlink" title="16.接收输入字符"></a>16.接收输入字符</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="variable">c1</span> <span class="operator">=</span> myScanner.next().charAt(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="17-switch注意事项"><a href="#17-switch注意事项" class="headerlink" title="17.switch注意事项"></a>17.switch注意事项</h2><ol>
+<li>当case中没有break时，会直接执行下一个case的执行语句（不进行判断），直到遇见break为止。</li>
+<li>switch(表达式)中表达式的返回值必须时：（byte,short,int,char,enum,String）</li>
+<li>case的值必须是常量</li>
+</ol>
+<h2 id="18-break特殊使用"><a href="#18-break特殊使用" class="headerlink" title="18.break特殊使用"></a>18.break特殊使用</h2><p>break还可以指定退出哪层（不建议使用）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lable1:  <span class="comment">// lable是自定义标签</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">    lable2:</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span> lable1; <span class="comment">// 直接退出外层for循环</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;i=&quot;</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19-数组的创建"><a href="#19-数组的创建" class="headerlink" title="19.数组的创建"></a>19.数组的创建</h2><p>一、动态初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据类型[] 数组名 = new 数据类型[大小]</span></span><br><span class="line"><span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据类型[] 数组名;	数组名 = new 数据类型[大小]</span></span><br><span class="line"><span class="type">double</span>[] arr;</span><br><span class="line">arr = <span class="keyword">new</span> <span class="title class_">double</span>[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
+
+<p>二、静态初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据类型[] 数组名 = &#123;数据1, 数据2, 数据3, ……&#125;</span></span><br><span class="line"><span class="type">int</span>[] arr = &#123;<span class="number">34</span>, <span class="number">32</span>, <span class="number">65</span>, <span class="number">88</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="20-数组默认值"><a href="#20-数组默认值" class="headerlink" title="20.数组默认值"></a>20.数组默认值</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">byte、short、int、long</td>
+<td>0</td>
+</tr>
+<tr>
+<td align="center">float、double</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td>\u0000</td>
+</tr>
+<tr>
+<td align="center">boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="center">String</td>
+<td>null</td>
+</tr>
+</tbody></table>
+<h2 id="21-数组注意事项"><a href="#21-数组注意事项" class="headerlink" title="21.数组注意事项"></a>21.数组注意事项</h2><ol>
+<li>数组是引用类型。</li>
+<li>数组在默认情况下是引用传递，赋得值是地址。</li>
+</ol>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210330221030.png" alt="image-20210330221022828"></p>
+<h2 id="22-冒泡排序算法"><a href="#22-冒泡排序算法" class="headerlink" title="22.冒泡排序算法"></a>22.冒泡排序算法</h2><p>数组有n个元素，一共进行n - 1轮排序；</p>
+<p>第一轮比较n - 1次</p>
+<p>第二轮比较n - 2次</p>
+<p>……</p>
+<p>第n - 1轮比较 1次</p>
+<p>示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arr = &#123;<span class="number">24</span>, <span class="number">69</span>, <span class="number">80</span>, <span class="number">57</span>, <span class="number">13</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; len - <span class="number">1</span>; k++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len - k - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] &gt; arr[i+<span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">            arr[i] = arr[i+<span class="number">1</span>];</span><br><span class="line">            arr[i+<span class="number">1</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="23-二维数组得创建"><a href="#23-二维数组得创建" class="headerlink" title="23.二维数组得创建"></a>23.二维数组得创建</h2><p>一、动态初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型[][] 数组名 = new 类型[大小][大小]</span></span><br><span class="line"><span class="type">int</span>[][] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据类型[][] 数组名;	数组名 = new 数据类型[大小][大小]</span></span><br><span class="line"><span class="type">double</span>[][] arr;</span><br><span class="line">arr = <span class="keyword">new</span> <span class="title class_">double</span>[<span class="number">5</span>][<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 特别声明法</span></span><br><span class="line"><span class="type">int</span>[] y[]; <span class="comment">// y是二位数组</span></span><br></pre></td></tr></table></figure>
+
+<p>二、静态初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接看示例，每个元素都是一个一维数组</span></span><br><span class="line"><span class="type">int</span>[][] arr = &#123;</span><br><span class="line">			&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">			&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">			&#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">			&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">		&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>三、列数不等的二维数组</p>
+<p>二维数组中得一维数组元素个数可以不同，比如：</p>
+<p>1</p>
+<p>1	2</p>
+<p>1	2	3</p>
+<p><strong>静态创建</strong>很简单：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] arr = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>想要<strong>动态创建</strong>这样的数组，在new的时候只写第一个大小（一维数组的个数），后面再分别给一维数组开辟空间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[][] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>][]; <span class="comment">// 三个一维数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        arr[i] = <span class="keyword">new</span> <span class="title class_">int</span>[i + <span class="number">1</span>];  <span class="comment">// 给一维数组开辟空间</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arr[i].length; j++) &#123;</span><br><span class="line">            arr[i][j] = j + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 遍历二维数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arr[i].length; j++) &#123;</span><br><span class="line">            System.out.print(arr[i][j] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="24-二维数组内存分析"><a href="#24-二维数组内存分析" class="headerlink" title="24.二维数组内存分析"></a>24.二维数组内存分析</h2><p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210330225216.png" alt="image-20210330225216051"></p>
+<h2 id="25-二位数组注意"><a href="#25-二位数组注意" class="headerlink" title="25.二位数组注意"></a>25.二位数组注意</h2><ol>
+<li>对于二位数组来说 arr.lengrh 代表一维数组的个数</li>
+<li>arr[i].length 代表第i个一维数组的元素个数</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F/" rel="prev" title="Java项目之在线聊天系统">
+                  <i class="fa fa-chevron-left"></i> Java项目之在线聊天系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/" rel="next" title="Java学习笔记02">
+                  Java学习笔记02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

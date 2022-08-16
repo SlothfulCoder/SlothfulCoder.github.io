@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关键字：XML、约束、dtd、Schema、DOM、SAX、常见解析器、Jsoup、Jsoup对象、Document对象、Elements对象、Element对象、Node对象、快速查询方式、selector选择器、XPath">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb学习笔记01">
+<meta property="og:url" content="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="关键字：XML、约束、dtd、Schema、DOM、SAX、常见解析器、Jsoup、Jsoup对象、Document对象、Elements对象、Element对象、Node对象、快速查询方式、selector选择器、XPath">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210902214840.png">
+<meta property="og:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210902214603.png">
+<meta property="article:published_time" content="2022-08-16T06:48:03.798Z">
+<meta property="article:modified_time" content="2021-09-03T13:19:49.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210902214840.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/","path":"2022/08/16/JavaWeb学习笔记01/","title":"JavaWeb学习笔记01"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaWeb学习笔记01 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-XML%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1.XML概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-XML%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.XML语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BA%A6%E6%9D%9F"><span class="nav-number">3.</span> <span class="nav-text">3.约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DTD"><span class="nav-number">3.1.</span> <span class="nav-text">DTD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema"><span class="nav-number">3.2.</span> <span class="nav-text">Schema</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9CXML"><span class="nav-number">4.</span> <span class="nav-text">4.操作XML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E8%A7%A3%E6%9E%90%E6%80%9D%E6%83%B3"><span class="nav-number">4.1.</span> <span class="nav-text">两种解析思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">常见解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsoup"><span class="nav-number">4.3.</span> <span class="nav-text">Jsoup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">4.3.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.3.2.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jsoup%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.3.</span> <span class="nav-text">Jsoup对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.4.</span> <span class="nav-text">Document对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Elements%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.5.</span> <span class="nav-text">Elements对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Element%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.6.</span> <span class="nav-text">Element对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.7.</span> <span class="nav-text">Node对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%BF%AB%E9%80%9F%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">5.快速查询方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#selector%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text">selector选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XPath"><span class="nav-number">5.2.</span> <span class="nav-text">XPath</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaWeb学习笔记01 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaWeb学习笔记01
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-03 21:19:49" itemprop="dateModified" datetime="2021-09-03T21:19:49+08:00">2021-09-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关键字：XML、约束、dtd、Schema、DOM、SAX、常见解析器、Jsoup、Jsoup对象、Document对象、Elements对象、Element对象、Node对象、快速查询方式、selector选择器、XPath</p>
+<span id="more"></span>
+
+<h2 id="1-XML概念"><a href="#1-XML概念" class="headerlink" title="1.XML概念"></a>1.XML概念</h2><p>XML： Extensible Markup Language，可扩展标记语言，语法类似html，不过xml的标签都是自定义的</p>
+<p><strong>功能</strong></p>
+<ol>
+<li>存储数据</li>
+<li>配置文件</li>
+<li>在网络中传输</li>
+</ol>
+<p><strong>xml与html的区别</strong></p>
+<ol>
+<li>xml的标签都是自定义的，html标签是预定义的</li>
+<li>xml的语法严格，html的语法松散</li>
+<li>xml是存储数据的，html是展示数据的</li>
+</ol>
+<h2 id="2-XML语法"><a href="#2-XML语法" class="headerlink" title="2.XML语法"></a>2.XML语法</h2><p><strong>基本语法</strong></p>
+<p>XML由5个部分组成：文档声明、指令、标签、属性、文本</p>
+<ol>
+<li>文档声明</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml 属性列表 ?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>  属性列表内容：</p>
+<ul>
+<li><p>version：版本号</p>
+</li>
+<li><p>encoding：编码方式，告知解析引擎当前文档使用的字符集，默认值是ISO-8859-1，像idea这样的高级编码工具，会自动识别encoding的值，修改文件实际编码方式与encoding保持一致</p>
+</li>
+<li><p>standalone：是否独立，取值为yes和no，现在一般不设置了，即使设置了yes，也可以依赖其他文件</p>
+</li>
+</ul>
+<ol start="2">
+<li>指令（了解）：结合css的</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/css&quot;</span> href=<span class="string">&quot;a.css&quot;</span> ?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>标签：标签名称是自定义的</p>
+<p>命名规则：</p>
+<ul>
+<li>名称可以保护字母、数字以及其他字符</li>
+<li>名称不能以数字或标点符号开始</li>
+<li>名称不能以字母xml（或者XML、Xml等等）开始</li>
+<li>名称不能包含空格</li>
+</ul>
+</li>
+<li><p>属性：属性也是自定义的，其中id属性类型，不过只是写id不能识别为id，需要给id属性添加约束</p>
+</li>
+<li><p>文本：标签内的文本内容，如果有特殊符号可以写在CDATA区</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;![CDATA[</span><br><span class="line">a + b = c;</span><br><span class="line">]]&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">students</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">&quot;study_0001&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span> <span class="attr">id</span>=<span class="string">&quot;001&quot;</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>18<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sex</span>&gt;</span>male<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">&quot;study_0002&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>jack<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>24<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sex</span>&gt;</span>female<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">code</span>&gt;</span></span><br><span class="line">            &lt;![CDATA[</span><br><span class="line">                a + b = c;</span><br><span class="line">            ]]&gt;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">code</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">students</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>细节讨论</strong></p>
+<ol>
+<li>xml的第一行必须定义为文档声明，第一行是空行也不行</li>
+<li>xml文档中有且仅有一个根标签</li>
+<li>属性必须使用引号引起来（单双都可）</li>
+<li>标签必须正确关闭</li>
+<li>xml标签名称区分大小写</li>
+</ol>
+<h2 id="3-约束"><a href="#3-约束" class="headerlink" title="3.约束"></a>3.约束</h2><p>作用：规定xml文档的书写规则，（在使用框架的时候，需要书写xml配置文件，引入约束后就可以规定xml的书写格式，帮助书写）</p>
+<p>常用的约束有DTD和Schema</p>
+<h3 id="DTD"><a href="#DTD" class="headerlink" title="DTD"></a>DTD</h3><p>dtd是一种简单的约束技术，有缺陷，被替代</p>
+<p><strong>dtd文件示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--students标签下可以有1个至多个student标签--&gt;</span><br><span class="line">&lt;!ELEMENT students (student+) &gt;</span><br><span class="line">&lt;!--student标签下可以有三种标签, 且每种只能出现一次, 并且要按照name, age, sex 的顺序出现--&gt;</span><br><span class="line">&lt;!ELEMENT student (name,age,sex)&gt;</span><br><span class="line">&lt;!--声明name, age, sex标签, 且都是字符串类型--&gt;</span><br><span class="line">&lt;!ELEMENT name (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT age (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT sex (#PCDATA)&gt;</span><br><span class="line">&lt;!--为student标签添加属性约束, 属性名为number, 属性类型是ID,表示number的值唯一, #REQUIRED表示这个属性必须出现--&gt;</span><br><span class="line">&lt;!ATTLIST student number ID #REQUIRED&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用约束规则</strong></p>
+<p>内部dtd：将约束规则定义在xml中 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">students</span> [dtd约束规则]&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>外部dtd：将约束规则定义在外部dtd文件中</p>
+<ol>
+<li>本地：引用本地的dtd文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根标签名 <span class="keyword">SYSTEM</span> <span class="string">&quot;dtd文件的位置&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>网络：引用网络中的dtd文件</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根标签名 <span class="keyword">PUBLIC</span> <span class="string">&quot;dtd文件名字&quot;</span> <span class="string">&quot;dtd文件的位置URL&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><p>Schema是一种复杂的约束技术</p>
+<p><strong>xsd文件解析示例</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">xsd:schema</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.itcast.cn/xml&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsd</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">targetNamespace</span>=<span class="string">&quot;http://www.itcast.cn/xml&quot;</span> <span class="attr">elementFormDefault</span>=<span class="string">&quot;qualified&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--    定义一个students标签, 类型是自定义的studentsType--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">&quot;students&quot;</span> <span class="attr">type</span>=<span class="string">&quot;studentsType&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    解释自定义组合类型(xsd:complexType)的studentsType,</span></span><br><span class="line"><span class="comment">        这个类型的标签内,</span></span><br><span class="line"><span class="comment">        按顺序(xsd:sequence)出现student标签, student标签是自定义的studentType类型,</span></span><br><span class="line"><span class="comment">        student最小出现0次(minOccurs=&quot;0&quot;), 没有上限次数(maxOccurs=&quot;unbounded&quot;)--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:complexType</span> <span class="attr">name</span>=<span class="string">&quot;studentsType&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:sequence</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span> <span class="attr">type</span>=<span class="string">&quot;studentType&quot;</span> <span class="attr">minOccurs</span>=<span class="string">&quot;0&quot;</span> <span class="attr">maxOccurs</span>=<span class="string">&quot;unbounded&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xsd:sequence</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xsd:complexType</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--    解释自定义组合类型(xsd:complexType)的studentType,</span></span><br><span class="line"><span class="comment">        这个类型的标签内,按照顺序(xsd:sequence)出现,</span></span><br><span class="line"><span class="comment">        字符串类型(type=&quot;xsd:string&quot;)的name标签</span></span><br><span class="line"><span class="comment">        自定义类型(type=&quot;ageType&quot;)的age标签</span></span><br><span class="line"><span class="comment">        自定义类型(type=&quot;sexType&quot;)的sex标签</span></span><br><span class="line"><span class="comment">        这个类型的标签, 还有自定义类型(type=&quot;numberType&quot;)的number属性,</span></span><br><span class="line"><span class="comment">        且这个属性必须出现(use=&quot;required&quot;)--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:complexType</span> <span class="attr">name</span>=<span class="string">&quot;studentType&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:sequence</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;xsd:string&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">type</span>=<span class="string">&quot;ageType&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">type</span>=<span class="string">&quot;sexType&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xsd:sequence</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:attribute</span> <span class="attr">name</span>=<span class="string">&quot;number&quot;</span> <span class="attr">type</span>=<span class="string">&quot;numberType&quot;</span> <span class="attr">use</span>=<span class="string">&quot;required&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xsd:complexType</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    解释自定义简单类型(xsd:simpleType)的 sexType</span></span><br><span class="line"><span class="comment">        这个简单类型sexType的基本数据格式是字符串(xsd:restriction base=&quot;xsd:string&quot;)</span></span><br><span class="line"><span class="comment">        可以填写的只有两个枚举值male和female--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:simpleType</span> <span class="attr">name</span>=<span class="string">&quot;sexType&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:restriction</span> <span class="attr">base</span>=<span class="string">&quot;xsd:string&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:enumeration</span> <span class="attr">value</span>=<span class="string">&quot;male&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:enumeration</span> <span class="attr">value</span>=<span class="string">&quot;female&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xsd:restriction</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xsd:simpleType</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    解释自定义简单类型(xsd:simpleType)的ageType</span></span><br><span class="line"><span class="comment">        这个简单类型ageType的基本数据格式是整数(&lt;xsd:restriction base=&quot;xsd:integer&quot;&gt;)</span></span><br><span class="line"><span class="comment">        最小值是0</span></span><br><span class="line"><span class="comment">        最大值是256</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:simpleType</span> <span class="attr">name</span>=<span class="string">&quot;ageType&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:restriction</span> <span class="attr">base</span>=<span class="string">&quot;xsd:integer&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:minInclusive</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:maxInclusive</span> <span class="attr">value</span>=<span class="string">&quot;256&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xsd:restriction</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xsd:simpleType</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    解释自定义简单类型numberType</span></span><br><span class="line"><span class="comment">        这个简单类型的基本数据格式是字符串</span></span><br><span class="line"><span class="comment">        字符串格式必须是以study_开头, 后面跟4个数字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xsd:simpleType</span> <span class="attr">name</span>=<span class="string">&quot;numberType&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xsd:restriction</span> <span class="attr">base</span>=<span class="string">&quot;xsd:string&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xsd:pattern</span> <span class="attr">value</span>=<span class="string">&quot;study_\d&#123;4&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xsd:restriction</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xsd:simpleType</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xsd:schema</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p><strong>使用约束规则</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">	1.填写xml文档的根元素</span></span><br><span class="line"><span class="comment">	2.引入xsi前缀.  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line"><span class="comment">	3.引入xsd文件命名空间.  xsi:schemaLocation=&quot;http://www.itcast.cn/xml  student.xsd&quot;</span></span><br><span class="line"><span class="comment">	4.为每一个xsd约束声明一个前缀,作为标识  xmlns=&quot;http://www.itcast.cn/xml&quot;</span></span><br><span class="line"><span class="comment">	  且xmlns=&quot;http://www.itcast.cn/xml&quot;代表的是把&quot;http://www.itcast.cn/xml&quot;命名空间</span></span><br><span class="line"><span class="comment">	  设置为默认前缀, 即标签前什么都不写就代表用这个命名空间</span></span><br><span class="line"><span class="comment">	  如果要设置必须要写名字才能用的前缀(别名),需要指定前缀名</span></span><br><span class="line"><span class="comment">	  xmlns:a=&quot;http://www.itcast.cn/xml&quot;</span></span><br><span class="line"><span class="comment">	  这样把前缀指定为a, 要使用这个约束,就必须在标签前写上这个别名</span></span><br><span class="line"><span class="comment">	  &lt;a:sex&gt;male&lt;/sex&gt;</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">students</span>   <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">xmlns</span>=<span class="string">&quot;http://www.itcast.cn/xml&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.itcast.cn/xml  student.xsd&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">&quot;study_0001&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">age</span>&gt;</span>18<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">sex</span>&gt;</span>male<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">student</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">students</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-操作XML"><a href="#4-操作XML" class="headerlink" title="4.操作XML"></a>4.操作XML</h2><p>其实就是将xml文档中的数据读取到内存中，和将内存中的数据保存到xml文档中，持久化的存储</p>
+<h3 id="两种解析思想"><a href="#两种解析思想" class="headerlink" title="两种解析思想"></a>两种解析思想</h3><ol>
+<li>DOM：将标记语言文档一次性加载进内存，在内存中形成一棵dom树。服务器常用这种思想<ul>
+<li>优点：操作方便，可以对文档进行CRUD的所有操作</li>
+<li>缺点：占内存，形成的dom树是xml文件大小的1000到10000倍左右</li>
+</ul>
+</li>
+<li>SAX：逐行读取，基于事件驱动的。现在手机都是这个思想<ul>
+<li>优点：不占内存</li>
+<li>只能读取，不能增删改</li>
+</ul>
+</li>
+</ol>
+<h3 id="常见解析器"><a href="#常见解析器" class="headerlink" title="常见解析器"></a>常见解析器</h3><ol>
+<li>JAXP： sun公司提供的解析器，支持dom和sax两种思想，性能低，基本没人用</li>
+<li>DOM4J：一款非常优秀的解析器</li>
+<li>Jsoup： jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。也可以用于解析xml</li>
+<li>PULL： Android操作系统内置的解析器，sax方式的</li>
+</ol>
+<h3 id="Jsoup"><a href="#Jsoup" class="headerlink" title="Jsoup"></a>Jsoup</h3><p>示例用的是jsoup-1.11.2.jar</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><ol>
+<li>导入jar包</li>
+<li>获取Document对象</li>
+<li>获取对应的标签Element对象</li>
+<li>获取数据</li>
+</ol>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="comment">// 获取src\\user.xml的绝对路径</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> JsoupDemo01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">    <span class="comment">// 获取Document对象</span></span><br><span class="line">    <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    <span class="comment">// Elements继承了ArrayList</span></span><br><span class="line">    <span class="comment">// public class Elements extends ArrayList&lt;Element&gt;</span></span><br><span class="line">    <span class="type">Elements</span> <span class="variable">name</span> <span class="operator">=</span> document.getElementsByTag(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">    System.out.println(name.size());</span><br><span class="line">    <span class="keyword">for</span> (Element element : name) &#123;</span><br><span class="line">        System.out.println(element.text()); <span class="comment">// 打印element中的纯文本内容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里Document是一棵xml文件内容的dom树，Elements是一个继承了ArrayList，里面存放了多个Element对象，每个Element对象其实还是相当于dom树，不过算是document的子树</p>
+</blockquote>
+<p><strong>dom树</strong></p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210902214840.png" alt="image-20210902214839985"></p>
+<h4 id="Jsoup对象"><a href="#Jsoup对象" class="headerlink" title="Jsoup对象"></a>Jsoup对象</h4><p>Jsoup是工具类，里面有一些静态方法，可以用于解析html或xml文档，返回Document</p>
+<p><strong>常用的parse方法的三种重载</strong></p>
+<ol>
+<li>parse(File in, String charsetName)：用于解析解析xml或html文件</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="comment">// 获取src\\user.xml的绝对路径</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> JsoupDemo01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   <span class="comment">// Elements继承了ArrayList</span></span><br><span class="line">   <span class="comment">// public class Elements extends ArrayList&lt;Element&gt;</span></span><br><span class="line">   <span class="type">Elements</span> <span class="variable">name</span> <span class="operator">=</span> document.getElementsByTag(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">   System.out.println(name.size());</span><br><span class="line">   <span class="keyword">for</span> (Element element : name) &#123;</span><br><span class="line">       System.out.println(element.text());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>parse(String html)：用于解析xml或html字符串</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">   <span class="type">Document</span> <span class="variable">parse</span> <span class="operator">=</span> Jsoup.parse(<span class="string">&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; ?&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;&lt;students&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;    &lt;student number=\&quot;study_0001\&quot;&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;name&gt;tom&lt;/name&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;age&gt;18&lt;/age&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;sex&gt;male&lt;/sex&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;    &lt;/student&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;    &lt;student number=\&quot;study_0002\&quot;&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;name&gt;jack&lt;/name&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;age&gt;24&lt;/age&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;        &lt;sex&gt;female&lt;/sex&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;    &lt;/student&gt;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;\n&quot;</span> +</span><br><span class="line">           <span class="string">&quot;&lt;/students&gt;&quot;</span>);</span><br><span class="line">   System.out.println(parse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>parse(URL url, int timeoutMillis)：通过网络路径获取指定的html或xml的文档对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test01</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;https://tieba.baidu.com/index.html&quot;</span>);</span><br><span class="line">   <span class="type">Document</span> <span class="variable">parse</span> <span class="operator">=</span> Jsoup.parse(url,<span class="number">10000</span>);</span><br><span class="line">   System.out.println(parse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Document对象"><a href="#Document对象" class="headerlink" title="Document对象"></a>Document对象</h4><p>文档对象，代表内存中的dom树，有多种获取Element对象的方法</p>
+<ol>
+<li>getElementById(String id)：根据id属性值获取唯一的element对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Document01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">Element</span> <span class="variable">element</span> <span class="operator">=</span> document.getElementById(<span class="string">&quot;001&quot;</span>);</span><br><span class="line">   System.out.println(element.text());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>getElementsByTag(String tagName)：根据标签名称获取元素对象集合</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Document01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path),<span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">Elements</span> <span class="variable">name</span> <span class="operator">=</span> document.getElementsByTag(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (Element element : name) &#123;</span><br><span class="line">       System.out.println(element.text());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>getElementsByAttribute(String key)：根据属性名称获取元素对象集合</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Document01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">Elements</span> <span class="variable">elements</span> <span class="operator">=</span> document.getElementsByAttribute(<span class="string">&quot;number&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (Element element : elements) &#123;</span><br><span class="line">       System.out.println(element.text());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>getElementsByAttributeValue(String key, String value)：根据对应的属性名和属性值获取元素对象集合</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Document01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">Elements</span> <span class="variable">elements</span> <span class="operator">=</span> document.getElementsByAttributeValue(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;001&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (Element element : elements) &#123;</span><br><span class="line">       System.out.println(element.text());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Elements对象"><a href="#Elements对象" class="headerlink" title="Elements对象"></a>Elements对象</h4><p>元素Element对象的集合。可以当做 ArrayList&lt;Element&gt;来使用</p>
+<h4 id="Element对象"><a href="#Element对象" class="headerlink" title="Element对象"></a>Element对象</h4><p>元素对象</p>
+<p><strong>获取子元素对象</strong></p>
+<ol>
+<li>getElementById(String id)：根据id属性值获取唯一的element对象</li>
+<li>getElementsByTag(String tagName)：根据标签名称获取元素对象集合</li>
+<li>getElementsByAttribute(String key)：根据属性名称获取元素对象集合</li>
+<li>getElementsByAttributeValue(String key, String value)：根据对应的属性名和属性值获取元素对象集合</li>
+</ol>
+<p><strong>获取属性值</strong></p>
+<p>String attr(String key)：根据属性名称获取属性值</p>
+<p><strong>获取文本内容</strong></p>
+<ol>
+<li>String text():获取纯文本内容</li>
+<li>String html():获取标签体的所有内容(包括字标签的字符串内容)</li>
+</ol>
+<h4 id="Node对象"><a href="#Node对象" class="headerlink" title="Node对象"></a>Node对象</h4><p>节点对象，是Document和Element的父类</p>
+<p><img src="https://genius-blog.oss-cn-beijing.aliyuncs.com/img/20210902214603.png" alt="image-20210902214603471"></p>
+<h2 id="5-快速查询方式"><a href="#5-快速查询方式" class="headerlink" title="5.快速查询方式"></a>5.快速查询方式</h2><p>为了更快的准确的定位到我们想要匹配的标签，引入了更加快捷的查询方式</p>
+<h3 id="selector选择器"><a href="#selector选择器" class="headerlink" title="selector选择器"></a>selector选择器</h3><p>selector选择器是Document类用select方法，配合Selector类中定义的语法实现的快速查询</p>
+<p><strong>使用举例</strong></p>
+<ol>
+<li>查询所有name标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Elements</span> <span class="variable">name</span> <span class="operator">=</span> document.select(<span class="string">&quot;name&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询id为001的标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Elements</span> <span class="variable">select</span> <span class="operator">=</span> document.select(<span class="string">&quot;#001&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查询存在属性number，且number值为study_0001的student标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Elements</span> <span class="variable">select</span> <span class="operator">=</span> document.select(<span class="string">&quot;student[number=study_0001]&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查询直接在student标签下，存在属性id，且id值为001的name标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Elements</span> <span class="variable">select</span> <span class="operator">=</span> document.select(<span class="string">&quot;student &gt; name[id=001]&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="XPath"><a href="#XPath" class="headerlink" title="XPath"></a>XPath</h3><p>XPath即为XML路径语言，它是一种用来确定XML（标准通用标记语言的子集）文档中某部分位置的语言</p>
+<p><strong>使用步骤</strong></p>
+<ol>
+<li>导入jar包</li>
+<li>获取Document对象</li>
+<li>根据Document对象，创建JXDocument对象</li>
+<li>用JXDocument对象，凭借xpath语法查询</li>
+</ol>
+<p><strong>使用举例</strong></p>
+<ol>
+<li>获取所有的student标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException, XpathSyntaxErrorException &#123;</span><br><span class="line">   <span class="comment">// 获取students.xml文件的绝对路径</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Xpath01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="comment">// 获取Document对象</span></span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="comment">// 根据Document对象创建JXDocument</span></span><br><span class="line">   <span class="type">JXDocument</span> <span class="variable">jxDocument</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JXDocument</span>(document);</span><br><span class="line">   <span class="comment">// 获取所有的student标签</span></span><br><span class="line">   List&lt;JXNode&gt; jxNodes = jxDocument.selN(<span class="string">&quot;//student&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (JXNode jxNode : jxNodes) &#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line">       System.out.println(jxNode);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取所有student下的name标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException, XpathSyntaxErrorException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Xpath01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">JXDocument</span> <span class="variable">jxDocument</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JXDocument</span>(document);</span><br><span class="line">   <span class="comment">// 获取所有student下的name标签</span></span><br><span class="line">   List&lt;JXNode&gt; jxNodes = jxDocument.selN(<span class="string">&quot;//student/name&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (JXNode jxNode : jxNodes) &#123;</span><br><span class="line">       System.out.println(jxNode);</span><br><span class="line">       System.out.println(<span class="string">&quot;======================================&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>获取所有student下带id属性的name标签</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException, XpathSyntaxErrorException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Xpath01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">JXDocument</span> <span class="variable">jxDocument</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JXDocument</span>(document);</span><br><span class="line">   <span class="comment">// 获取所有student下带id属性的name标签</span></span><br><span class="line">   List&lt;JXNode&gt; jxNodes = jxDocument.selN(<span class="string">&quot;//student/name[@id]&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (JXNode jxNode : jxNodes) &#123;</span><br><span class="line">       System.out.println(jxNode);</span><br><span class="line">       System.out.println(<span class="string">&quot;================================&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>获取student下id等于001的name属性</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException, XpathSyntaxErrorException &#123;</span><br><span class="line">   <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> Xpath01.class.getClassLoader().getResource(<span class="string">&quot;students.xml&quot;</span>).getPath();</span><br><span class="line">   <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">File</span>(path), <span class="string">&quot;utf8&quot;</span>);</span><br><span class="line">   <span class="type">JXDocument</span> <span class="variable">jxDocument</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JXDocument</span>(document);</span><br><span class="line">   <span class="comment">// 获取student下id等于001的name属性</span></span><br><span class="line">   List&lt;JXNode&gt; jxNodes = jxDocument.selN(<span class="string">&quot;//student/name[@id=&#x27;001&#x27;]&quot;</span>);</span><br><span class="line">   <span class="keyword">for</span> (JXNode jxNode : jxNodes) &#123;</span><br><span class="line">       System.out.println(jxNode);</span><br><span class="line">       System.out.println(<span class="string">&quot;===========================================&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaSSM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B007/" rel="prev" title="JavaSSM学习笔记07">
+                  <i class="fa fa-chevron-left"></i> JavaSSM学习笔记07
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/JavaWeb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/" rel="next" title="JavaWeb学习笔记02">
+                  JavaWeb学习笔记02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

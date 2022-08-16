@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关键字：操作输入Input类、预设体、碰撞器Collider组件、刚体RigidBody组件、碰撞检测、触发器、射线Ray">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Study03">
+<meta property="og:url" content="http://example.com/2022/08/16/Study03/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="关键字：操作输入Input类、预设体、碰撞器Collider组件、刚体RigidBody组件、碰撞检测、触发器、射线Ray">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515233853789.png">
+<meta property="og:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515234506763.png">
+<meta property="og:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220516001653205.png">
+<meta property="og:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220516002354567.png">
+<meta property="og:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515235053423.png">
+<meta property="article:published_time" content="2022-08-16T07:01:46.183Z">
+<meta property="article:modified_time" content="2022-07-14T19:31:21.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515233853789.png">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/Study03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/Study03/","path":"2022/08/16/Study03/","title":"Study03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Study03 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E8%BE%93%E5%85%A5Input%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">操作输入Input类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">键盘输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E8%BE%93%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">鼠标输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E8%BD%B4-x2F-%E6%8C%89%E9%94%AE"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟轴&#x2F;按键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%9D%A2%E6%9D%BF"><span class="nav-number">1.3.1.</span> <span class="nav-text">设置面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E8%BD%B4-x2F-%E6%8C%89%E9%94%AE%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">虚拟轴&#x2F;按键方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E8%AE%BE%E4%BD%93"><span class="nav-number">2.</span> <span class="nav-text">预设体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%A2%84%E8%AE%BE%E4%BD%93%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">根据预设体创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E5%99%A8Collider%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">碰撞器Collider组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cliender%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">Cliender组件的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cliender%E7%BB%84%E4%BB%B6%E9%A1%B5%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">Cliender组件页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9A%E4%BD%93RigidBody"><span class="nav-number">4.</span> <span class="nav-text">刚体RigidBody</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RigidBody%E9%9D%A2%E6%9D%BF"><span class="nav-number">4.1.</span> <span class="nav-text">RigidBody面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B"><span class="nav-number">5.</span> <span class="nav-text">碰撞检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A2%B0%E6%92%9E%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">碰撞产生条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">回调方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E8%B0%83%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0Collision"><span class="nav-number">5.3.</span> <span class="nav-text">回调方法参数Collision</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E4%BA%A7%E7%94%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">触发事件产生条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">回调函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E7%BA%BFRay"><span class="nav-number">7.</span> <span class="nav-text">射线Ray</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B0%84%E7%BA%BF"><span class="nav-number">7.1.</span> <span class="nav-text">创建射线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%BC%A0%E6%A0%87%E5%B0%84%E7%BA%BF"><span class="nav-number">7.2.</span> <span class="nav-text">获取鼠标射线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E5%B0%84%E7%BA%BF"><span class="nav-number">7.3.</span> <span class="nav-text">发射射线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RaycastHit"><span class="nav-number">7.4.</span> <span class="nav-text">RaycastHit</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/Study03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Study03 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Study03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 15:01:46" itemprop="dateCreated datePublished" datetime="2022-08-16T15:01:46+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-15 03:31:21" itemprop="dateModified" datetime="2022-07-15T03:31:21+08:00">2022-07-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关键字：操作输入Input类、预设体、碰撞器Collider组件、刚体RigidBody组件、碰撞检测、触发器、射线Ray</p>
+<span id="more"></span>
+
+<h2 id="操作输入Input类"><a href="#操作输入Input类" class="headerlink" title="操作输入Input类"></a>操作输入Input类</h2><h3 id="键盘输入"><a href="#键盘输入" class="headerlink" title="键盘输入"></a>键盘输入</h3><ol>
+<li>GetKey：按住某键时返回true</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Input.GetKey(KeyCode.Space)) &#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;按住了空格键&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>GetKeyDown：按下某键第一个帧返回true</p>
+</li>
+<li><p>GetKeyUp：松开某键第一帧返回true</p>
+</li>
+</ol>
+<h3 id="鼠标输入"><a href="#鼠标输入" class="headerlink" title="鼠标输入"></a>鼠标输入</h3><ol>
+<li>mousePosition：鼠标的屏幕坐标</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 窗口左下角(0, 0, 0)</span></span><br><span class="line"><span class="comment">// (x, y, 0) 最后一个维度始终为0</span></span><br><span class="line">Debug.Log(Input.mousePosition); </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>GetMouseButtonDown：按下鼠标的第一帧返回true</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 左0右1中2</span></span><br><span class="line"><span class="comment">// 按住鼠标左键</span></span><br><span class="line"><span class="keyword">if</span>(Input.GetMouseButton(<span class="number">0</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>GetMouseButtonUp：松开鼠标的第一帧返回true</p>
+</li>
+<li><p>GetMouseButton：按住返回true</p>
+</li>
+</ol>
+<h3 id="虚拟轴-x2F-按键"><a href="#虚拟轴-x2F-按键" class="headerlink" title="虚拟轴&#x2F;按键"></a>虚拟轴&#x2F;按键</h3><h4 id="设置面板"><a href="#设置面板" class="headerlink" title="设置面板"></a>设置面板</h4><p>Edit -&gt; ProjectSetting -&gt; Input Manager</p>
+<p><img src="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515233853789.png" alt="image-20220515233853789"></p>
+<p><img src="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515234506763.png" alt="image-20220515234506763"></p>
+<h4 id="虚拟轴-x2F-按键方法"><a href="#虚拟轴-x2F-按键方法" class="headerlink" title="虚拟轴&#x2F;按键方法"></a>虚拟轴&#x2F;按键方法</h4><ol>
+<li>GetAxis：根据轴名称获取结果</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不按键是0，按下键向1或-1变化</span></span><br><span class="line"><span class="built_in">float</span> hor = Input.GetAxis(<span class="string">&quot;Horizontal&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220516001653205.png" alt="image-20220515235053423"></p>
+<ol start="2">
+<li>GetButton：按住，根据按键名称返回结果bool</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Input.GetButton(<span class="string">&quot;Fire&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// 按住开火键</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>GetButtonDown：按下，根据按键名称返回结果bool</p>
+</li>
+<li><p>GetButtonUp：松开，根据按键名称返回结果bool</p>
+</li>
+</ol>
+<h2 id="预设体"><a href="#预设体" class="headerlink" title="预设体"></a>预设体</h2><p>预设体是一个根据游戏对象创建的文件，创建方法是将游戏对象拖到Project栏中。</p>
+<h3 id="根据预设体创建对象"><a href="#根据预设体创建对象" class="headerlink" title="根据预设体创建对象"></a>根据预设体创建对象</h3><p>设置公共属性导入预设体后，用Instantiate方法创建</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据预设体创建对象，bullet是预设体</span></span><br><span class="line">GameObject blt = Instantiate(bullet, gunPoint.position, Quaternion.identity);</span><br><span class="line">blt.GetComponent&lt;Bullet&gt;().forword = transform.forward;</span><br><span class="line"><span class="comment">// 3s后销毁blt对象</span></span><br><span class="line">Destroy(blt, <span class="number">3f</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ol>
+<li>使一个游戏对象以单独文件的方式存在。</li>
+<li>使用该预设体文件，即可随时创建出与该预设体完全一样的游戏对象到场景中。</li>
+</ol>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>预设体的脚本中有公共游戏对象属性时，不能托场景里的游戏对象，只能拖文件。</p>
+<p>预设体生成的游戏对象的三个按钮</p>
+<ol>
+<li>Select：选中属于的预设体文件</li>
+<li>Revert：清除对对象的修改，还原成预设体的样子</li>
+<li>Apply：将当前游戏对象的设置应用到预设体</li>
+</ol>
+<h2 id="碰撞器Collider组件"><a href="#碰撞器Collider组件" class="headerlink" title="碰撞器Collider组件"></a>碰撞器Collider组件</h2><h3 id="Cliender组件的作用"><a href="#Cliender组件的作用" class="headerlink" title="Cliender组件的作用"></a>Cliender组件的作用</h3><ol>
+<li>用一个包围盒（box、sphere、capsule）将一个模型包裹起来，该包围来描述碰撞范围</li>
+<li>配合刚体组件，实现物理碰撞效果</li>
+</ol>
+<h3 id="Cliender组件页面"><a href="#Cliender组件页面" class="headerlink" title="Cliender组件页面"></a>Cliender组件页面</h3><p><img src="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220516002354567.png" alt="image-20220516001653205"></p>
+<h2 id="刚体RigidBody"><a href="#刚体RigidBody" class="headerlink" title="刚体RigidBody"></a>刚体RigidBody</h2><h3 id="RigidBody面板"><a href="#RigidBody面板" class="headerlink" title="RigidBody面板"></a>RigidBody面板</h3><p><img src="http://genius-blog.oss-cn-beijing.aliyuncs.com/img/image-20220515235053423.png" alt="image-20220516002354567"></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>velocity：速度</p>
+<p>angularVelocity：</p>
+<p>drag：</p>
+<p>angularDrag：</p>
+<p>useGravity：</p>
+<p>isKinematic：</p>
+<p>freezeRotation：</p>
+<p>collisiionDetecitionMode：</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>AddForce：添加一个力</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rig.AddForce(Vector3.forward * <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>AddExplosionForce：添加爆炸力</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加爆炸力方法的刚体，才能收到爆炸影响</span></span><br><span class="line"><span class="comment">// 参数列表：爆炸力大小float，爆炸点位置，爆炸半径float</span></span><br><span class="line">rig.AddExplosionForce(<span class="number">10</span>, transform.forward, <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>AddForceAtPosition：在一个点上施加力</p>
+<p>AddRelativeForce：添加相对力</p>
+<p>AddRelativeTorque：添加相对力矩</p>
+<h2 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h2><h3 id="碰撞产生条件"><a href="#碰撞产生条件" class="headerlink" title="碰撞产生条件"></a>碰撞产生条件</h3><ol>
+<li>两个物体都有Collider</li>
+<li>至少有一个带有RigidBody</li>
+</ol>
+<h3 id="回调方法"><a href="#回调方法" class="headerlink" title="回调方法"></a>回调方法</h3><p>相撞的两个游戏对象都能调用这三个回调方法，只是参数相互是对方</p>
+<ol>
+<li><p>OnCollisionEnter(Collision other)：碰撞开始一瞬间时，调用一次</p>
+</li>
+<li><p>OnCollisionStay(Collision other)：碰撞过程持续调用，每帧调用一次（碰撞过程指接触且有相对运动）</p>
+</li>
+<li><p>OnCollisionExit(Collision other)：碰撞分离瞬间，调用一次</p>
+</li>
+</ol>
+<h3 id="回调方法参数Collision"><a href="#回调方法参数Collision" class="headerlink" title="回调方法参数Collision"></a>回调方法参数Collision</h3><p>两个常用属性</p>
+<ol>
+<li>colider：当前物体所碰撞到的游戏对象的碰撞组件</li>
+<li>contacts[]：所有碰撞点对象ContactPoint数组，碰撞点有一些有用的属性<ol>
+<li>point：碰撞点的坐标</li>
+<li>normal：碰撞点的法线</li>
+</ol>
+</li>
+</ol>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p>将碰撞体组件中的isTrigger属性勾选</p>
+<h3 id="触发事件产生条件"><a href="#触发事件产生条件" class="headerlink" title="触发事件产生条件"></a>触发事件产生条件</h3><ol>
+<li>两个物体都有碰撞组件</li>
+<li>至少有一个带有刚体</li>
+<li>两碰撞体至少有一个是触发器</li>
+</ol>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><ol>
+<li><p>OnTriggerEnter(Collder other)：进入触发器一瞬间，调用一次</p>
+</li>
+<li><p>OnTriggerStay(Collder other)：处于触发器之中，每帧调用一次</p>
+</li>
+<li><p>OnTriggerExit(Collder other)：离开触发器瞬间，调用一次</p>
+</li>
+</ol>
+<h2 id="射线Ray"><a href="#射线Ray" class="headerlink" title="射线Ray"></a>射线Ray</h2><p>射线就是一个起点加上一个方向的线，通常用于检测碰撞体</p>
+<h3 id="创建射线"><a href="#创建射线" class="headerlink" title="创建射线"></a>创建射线</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据起点和方向创建</span></span><br><span class="line">Ray ray = <span class="keyword">new</span> Ray(transform.position, transform.forward);</span><br><span class="line"><span class="comment">// 以相机为起点，加上一个方向获取射线</span></span><br><span class="line">Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取鼠标射线"><a href="#获取鼠标射线" class="headerlink" title="获取鼠标射线"></a>获取鼠标射线</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以相机为起点，加上一个方向获取射线</span></span><br><span class="line">Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);</span><br></pre></td></tr></table></figure>
+
+<h3 id="发射射线"><a href="#发射射线" class="headerlink" title="发射射线"></a>发射射线</h3><ol>
+<li>Physics.Raycast：发射物理射线，判断是否检测到碰撞体，并返回检测对象RaycastHit</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(Physics.Raycast(ray, <span class="keyword">out</span> hit)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Fire&quot;</span>)) &#123;</span><br><span class="line">        GameObject blt = Instantiate(bullet, Camera.main.transform.position, Quaternion.identity);</span><br><span class="line">        blt.GetComponent&lt;Rigidbody&gt;().velocity = (hit.point - Camera.main.transform.position).normalized * bltSpeed;</span><br><span class="line">        Destroy(blt, <span class="number">4f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Physics.RaycastAll：效果同上，不过这个方法的射线可以穿过碰撞体，检测出后面所有的碰撞体，out返回RaycastHit数组</li>
+</ol>
+<h3 id="RaycastHit"><a href="#RaycastHit" class="headerlink" title="RaycastHit"></a>RaycastHit</h3><ol>
+<li>point：碰撞点坐标</li>
+<li>collider：碰撞物体的Collider组件</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Study04/" rel="prev" title="Study04">
+                  <i class="fa fa-chevron-left"></i> Study04
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Study02/" rel="next" title="Study02">
+                  Study02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>

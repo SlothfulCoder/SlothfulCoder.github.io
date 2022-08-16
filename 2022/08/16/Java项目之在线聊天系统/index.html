@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关键字：对象流传输消息、对象流解决文件发送问题、ConcurrentHashMap是线程安全的Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java项目之在线聊天系统">
+<meta property="og:url" content="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="梁山好岗のBLOG">
+<meta property="og:description" content="关键字：对象流传输消息、对象流解决文件发送问题、ConcurrentHashMap是线程安全的Map">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-16T06:48:03.857Z">
+<meta property="article:modified_time" content="2021-08-08T07:36:03.000Z">
+<meta property="article:author" content="梁山好岗">
+<meta property="article:tag" content="hexo,blog,梁山好岗">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F/","path":"2022/08/16/Java项目之在线聊天系统/","title":"Java项目之在线聊天系统"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java项目之在线聊天系统 | 梁山好岗のBLOG</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">梁山好岗のBLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">就算是梦话也无妨，再说给我听听吧</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">1.项目介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%82%E8%80%83%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2.参考点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81%E4%BC%A0%E8%BE%93%E6%B6%88%E6%81%AF"><span class="nav-number">2.1.</span> <span class="nav-text">对象流传输消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81%E8%A7%A3%E5%86%B3%E6%96%87%E4%BB%B6%E5%8F%91%E9%80%81%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">对象流解决文件发送问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ConcurrentHashMap%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84Map"><span class="nav-number">3.</span> <span class="nav-text">3.ConcurrentHashMap是线程安全的Map</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">梁山好岗</p>
+  <div class="site-description" itemprop="description">站点描述</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="梁山好岗">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梁山好岗のBLOG">
+      <meta itemprop="description" content="站点描述">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java项目之在线聊天系统 | 梁山好岗のBLOG">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java项目之在线聊天系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 14:48:03" itemprop="dateCreated datePublished" datetime="2022-08-16T14:48:03+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-08-08 15:36:03" itemprop="dateModified" datetime="2021-08-08T15:36:03+08:00">2021-08-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关键字：对象流传输消息、对象流解决文件发送问题、ConcurrentHashMap是线程安全的Map</p>
+<span id="more"></span>
+
+<h2 id="1-项目介绍"><a href="#1-项目介绍" class="headerlink" title="1.项目介绍"></a>1.项目介绍</h2><p>点击下载源码：<a target="_blank" rel="noopener" href="https://genius-blog.oss-cn-beijing.aliyuncs.com/file/%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F.zip">在线聊天系统</a></p>
+<p>项目描述：在线聊天系统包括登录、退出、获取在线用户、私发消息、群发消息、发送文件、消息推送、离线消息等功能</p>
+<p><strong>登录</strong></p>
+<p>想要登录的用户会连接到服务器，并把用户输入的用户名和密码发送给服务器，服务器会将接收到的用户名和密码和数据库中比对，返回是否登录成功的消息。如果登录成功，服务器会为这个用户开启一个线程，用于循环等待接收这个客户端发送的消息，并把这个连接的socket、输入流、输出流封装成一个对象保存在Map集合中，把这个线程也封装也保存在一个Map集合中。客户端也会开启一个线程，用于循环等待接收这个服务器发送的消息，并把socket、输入流、输出流保存在一个类的静态成员用管理</p>
+<p><strong>退出</strong></p>
+<p>客户端向服务器发送退出消息，服务器接收到退出消息，关闭这个用户的socket，结束为用户创建的线程，把用户的socket和线程从Map中移除，并通知客户端也关闭socket，结束线程</p>
+<p><strong>获取在线用户</strong></p>
+<p>客户端向服务器发送获取在线用户消息，服务器遍历socket的Map集合，获取在线用户信息，返回给客户端</p>
+<p><strong>私发消息</strong></p>
+<p>客户端把要发送的消息、收信人等信息发送给服务器，服务器根据收信人信息，获取到收信人的socket，用收信人的socket把信息转发给收信人</p>
+<p><strong>群发消息</strong></p>
+<p>类似私发消息，不过这次服务器是遍历所有的socket，把数据发给每一个在线的人</p>
+<p><strong>发送文件</strong></p>
+<p>连发三种消息，第一次表明要发送文件，第二次发送文件信息（文件名等文件的信息），第三次发送文件。都由服务器转发，发送文件用的是对象流（参考点有解释）</p>
+<p><strong>消息推送</strong></p>
+<p>服务器一启动就创建一个线程，用于给每个在线用户发送消息，类似群发消息</p>
+<p><strong>离线消息</strong></p>
+<p>即私发消息时，如果收信人不在线，服务器先把要转发的消息保存起来，每当有用户登录成功，就查找有没有待接收的消息，如果有服务器就发送给他</p>
+<h2 id="2-参考点"><a href="#2-参考点" class="headerlink" title="2.参考点"></a>2.参考点</h2><h3 id="对象流传输消息"><a href="#对象流传输消息" class="headerlink" title="对象流传输消息"></a>对象流传输消息</h3><p>把socket获取的输入&#x2F;输出流封装成对象流，把要发送的消息封装成Message对象，发送一个对象就是发送一条消息，这样消息可以包含多种信息</p>
+<h3 id="对象流解决文件发送问题"><a href="#对象流解决文件发送问题" class="headerlink" title="对象流解决文件发送问题"></a>对象流解决文件发送问题</h3><p>问题描述：发送文件的时候，接收方需要循环读取，这样就需要发送方发送结束标记（使读到的数组读取长度等于-1），通过读到结束标记来退出循环，但是，字节流的结束标记通常靠的是shutdownOutput方法或是关闭流，而shutdownOutput会导致socket的输出流关闭，关闭流会导致socket关闭，无论是哪种情况，这个socket都不能再用了，如果想发送文件后保证socket仍然可用，这就需要想其他办法作为结束标记</p>
+<p>解决方案：字节流传输数据，都是发送一个byte数组和数组读取长度（len），所以，可以把byte数组和数组读取长度封装成一个对象，每次都发送一个对象过去，到文件发送完成的时候，再发送一个让数组读取长度为-1的对象。接收方循环读取，每接收到一个对象，便可以取出对象中的byte数组和数组读取长度，当接收到数组读取长度为-1的对象时，就代表文件接收完成了，退出循环</p>
+<p>下面是核心代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送文件</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> len;</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> ((len = fileInputStream.read(buf)) == -<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="type">FileStream</span> <span class="variable">fileStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileStream</span>(buf, len);</span><br><span class="line">        objectOutputStream.writeObject(fileStream);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 必须每次创建新的fileStream</span></span><br><span class="line">    <span class="type">FileStream</span> <span class="variable">fileStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileStream</span>(buf, len);</span><br><span class="line">    objectOutputStream.writeObject(fileStream);</span><br><span class="line">&#125;</span><br><span class="line">fileInputStream.close();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收文件</span></span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fileOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(path);</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="type">FileStream</span> <span class="variable">fileStream</span> <span class="operator">=</span> (FileStream) objectInputStream.readObject();</span><br><span class="line">    <span class="keyword">if</span> (fileStream.getLen() == -<span class="number">1</span>)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;文件接收完成,文件保存在&quot;</span> + path);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fileOutputStream.write(fileStream.getBuf(),<span class="number">0</span>,fileStream.getLen());</span><br><span class="line">    fileOutputStream.flush();</span><br><span class="line">&#125;</span><br><span class="line">fileOutputStream.close();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意！注意！注意！</p>
+<ol>
+<li>封装的数据包对象需要序列化</li>
+<li>fileStream的创建要写在发送文件的循环中，即每次都要发送一个新的对象。不能只创建一个fileStream对象，只是改变对象的buf和len，这样的话会导致接收方接收到的每个fileStream都是第一个fileStream。</li>
+<li>FileStream中的数组每次也都要创建新的，不能让FileStream中的byte数组直接等于buf数组，这样地址没变，所以我写的FileStream的构造方法为</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">FileStream</span><span class="params">(<span class="type">byte</span>[] buf, <span class="type">int</span> len)</span> &#123;</span><br><span class="line">    <span class="comment">// 如果不创建新的数组，每次发送的都是同一个buf</span></span><br><span class="line">    <span class="built_in">this</span>.buf = <span class="keyword">new</span> <span class="title class_">byte</span>[buf.length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; buf.length; i++) &#123;</span><br><span class="line">        <span class="built_in">this</span>.buf[i] = buf[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.len = len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="3-ConcurrentHashMap是线程安全的Map"><a href="#3-ConcurrentHashMap是线程安全的Map" class="headerlink" title="3.ConcurrentHashMap是线程安全的Map"></a>3.ConcurrentHashMap是线程安全的Map</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E9%A1%B9%E7%9B%AE%E4%B9%8B%E5%9D%A6%E5%85%8B%E5%A4%A7%E6%88%98/" rel="prev" title="Java项目之坦克大战">
+                  <i class="fa fa-chevron-left"></i> Java项目之坦克大战
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/16/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" rel="next" title="Java学习笔记01">
+                  Java学习笔记01 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">梁山好岗</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":false},"log":false});</script></body>
+</html>
